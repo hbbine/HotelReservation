@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springmvc.mapper.ReservationMapper">
+	
+	<!-- Create -->
+	<insert id="reservationInsert" parameterType="com.springmvc.hotelReservation3.dto.ReservationDTO">
+    <![CDATA[
+    insert into reservation
+    (m_id, r_checkin, r_checkout, r_type, r_adults, r_kids, r_price, CONFIRMATION_PAYMENT)
+    values
+    (#{reservationInsert.m_id}, #{reservationInsert.r_checkin}, #{reservationInsert.r_checkout},
+    #{reservationInsert.r_type}, #{reservationInsert.r_adults}, #{reservationInsert.r_kids},
+    #{reservationInsert.r_price}, #{reservationInsert.CONFIRMATION_PAYMENT})
+    ]]>
+	</insert>
+	
+	<!-- Read -->
+	<select id="getAllReservation" parameterType="com.springmvc.hotelReservation3.dto.ReservationDTO"
+        	resultType="com.springmvc.hotelReservation3.dto.ReservationDTO">
+    <![CDATA[
+    select * from reservation order by r_checkin ASC, r_type ASC
+    ]]>
+	</select>
+	
+</mapper>

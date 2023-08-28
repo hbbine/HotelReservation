@@ -25,42 +25,48 @@ public class HomeController {
 	 */
 	
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "top";
-	}
+//	@RequestMapping(value = "/", method = RequestMethod.GET)
+//	public String home(Locale locale, Model model) {
+//		logger.info("Welcome home! The client locale is {}.", locale);
+//		
+//		Date date = new Date();
+//		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+//		
+//		String formattedDate = dateFormat.format(date);
+//		
+//		model.addAttribute("serverTime", formattedDate );
+//		
+//		return "top";
+//	}
 	
 	@GetMapping("/about")
-	public String requestMainPage() {
+	public String requestAboutPage() {
 		
 		return"about";
 	}
 	
-	@GetMapping("/map")
-	public String requestMapPage() {
+	@GetMapping("/royalsweet")
+	public String requestRoyalsweetPage() {
 		
-		return"map";
+		return"royalsweet";
+	}
+	
+	@GetMapping("/deluxe")
+	public String requestDeluxePage() {
+		
+		return"deluxe";
+	}
+	
+	@GetMapping("/standard")
+	public String requestStandardPage() {
+		
+		return"standard";
 	}
 	
 	@GetMapping("/index")
-	public String requestRoyalPage() {
+	public String requestIndexPage() {
 		
 		return"index";
 	}
-	
-	@GetMapping("/b_01")
-	public String requestDeluxePage() {
-		
-		return"b_01";
-	}
-	
+
 }

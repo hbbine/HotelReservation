@@ -1,6 +1,6 @@
 package com.springmvc.hotelReservation3.dto;
 
-public class RoomDTO {
+public class Room {
 
 	/*
 	 * use kopo18; CREATE TABLE room ( 
@@ -22,7 +22,7 @@ public class RoomDTO {
 	private String room_img; //방 이미지 경로
 	private int room_count; //방 갯수
 	
-	public RoomDTO() {}
+	public Room() {}
 	
 	public int getRoom_id() {
 		return room_id;

@@ -1,16 +1,16 @@
-package com.springmvc.hotelReservation3.dto;
+package com.springmvc.dto;
 
 public class ReservationDTO {
 
 	/*
 	 * CREATE TABLE kopo18.reservation ( 
-	r_id INT NOT NULL auto_increment PRIMARY KEY, 
+	r_id VARCHAR(30) NOT NULL, 
 	m_id VARCHAR(30) NOT NULL,
 	r_checkin DATE NOT NULL, 
 	r_checkout DATE NOT NULL, 
 	r_type VARCHAR(50) NOT NULL, 
 	r_adults INT NOT NULL, 
-	r_kids INT NOT NULL, 
+	r_kids INT NOT NULL, s
 	r_price INT NOT NULL, 
 	CONFIRMATION_PAYMENT tinyint(1) DEFAULT NULL
 	);
@@ -20,7 +20,7 @@ public class ReservationDTO {
 	
 
 	
-	private String r_id; //예약번호
+	private String rid; //예약번호
 	private String m_id; //예약고객 ID
 	private String r_checkin; //체크인 날짜
 	private String r_checkout;//체크아웃 날짜
@@ -35,97 +35,78 @@ public class ReservationDTO {
 		super();
 	}
 
-
-	public String getR_id() {
-		return r_id;
+	public String getRid() {
+		return rid;
 	}
 
-
-	public void setR_id(String r_id) {
-		this.r_id = r_id;
+	public void setRid(String rid) {
+		this.rid = rid;
 	}
-
 
 	public String getM_id() {
 		return m_id;
 	}
 
-
 	public void setM_id(String m_id) {
 		this.m_id = m_id;
 	}
-
 
 	public String getR_checkin() {
 		return r_checkin;
 	}
 
-
 	public void setR_checkin(String r_checkin) {
 		this.r_checkin = r_checkin;
 	}
-
 
 	public String getR_checkout() {
 		return r_checkout;
 	}
 
-
 	public void setR_checkout(String r_checkout) {
 		this.r_checkout = r_checkout;
 	}
-
 
 	public String getR_type() {
 		return r_type;
 	}
 
-
 	public void setR_type(String r_type) {
 		this.r_type = r_type;
 	}
-
 
 	public int getR_adults() {
 		return r_adults;
 	}
 
-
 	public void setR_adults(int r_adults) {
 		this.r_adults = r_adults;
 	}
-
 
 	public int getR_kids() {
 		return r_kids;
 	}
 
-
 	public void setR_kids(int r_kids) {
 		this.r_kids = r_kids;
 	}
-
 
 	public int getR_price() {
 		return r_price;
 	}
 
-
 	public void setR_price(int r_price) {
 		this.r_price = r_price;
 	}
-
 
 	public boolean isCONFIRMATION_PAYMENT() {
 		return CONFIRMATION_PAYMENT;
 	}
 
-
 	public void setCONFIRMATION_PAYMENT(boolean cONFIRMATION_PAYMENT) {
 		CONFIRMATION_PAYMENT = cONFIRMATION_PAYMENT;
 	}
 
-	
 	//출력확인
 	/*
 	 * public void rToString() { System.out.println(this.rid + ", " + this.m_id +
