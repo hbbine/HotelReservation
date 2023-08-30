@@ -1,25 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-  <%@ include file="./inc/header.jsp" %>
+    
+	<!-- 달력 오픈소스 datepicker 시작 -->
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+	<!-- 달력 오픈소스 datepicker 끝 -->
 
-
-  
-
-<!-- Header Start -->
-	<div>
-		<img class="img-fluid"
-			src="${pageContext.request.contextPath}/resources/img/lobby.jpg"
-			alt="" />
-		<div class="container py-5">
-			
-		</div>
-	</div>
-	<!-- Header End -->
+</head>
 <body>
+	<%@ include file="./inc/header.jsp" %>
+	
 	<div id="reservation"
 		class="reservations-main pad-top-100 pad-bottom-100">
 		<div class="container">
@@ -50,17 +50,43 @@
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 								<div class="form-box">
 									<div class="form-box">
-									<form:input path="r_checkin" placeholder="checkinDate"
+									<form:input id ="checkin"  path="r_checkin" placeholder="check In" type="text"
 										required="true" data-error="Checkin is required" pattern="\d{4}-\d{2}-\d{2}"
 										title="Please enter a date in the format YYYY-mm-dd." />
+									<script>
+										$(function() {
+										$("#checkin").datepicker({
+											minDate : new Date(),
+											maxDate : '+365d',
+											dateFormat : 'yy-mm-dd',
+											showMonthAfterYear : true,
+											dayNamesMin : ['월', '화', '수', '목', '금', '토', '일' ], // 요일의 한글 형식.
+											monthNamesShort : ['1월', '2월', '3월', '4월', '5월', '6월', '7월',
+																'8월', '9월', '10월', '11월', '12월' ] // 월의 한글 형식.
+											});
+										});
+									</script>	
+									</div>
 								</div>
-							</div>
 							<!-- end col -->
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 								<div class="form-box">
-								<form:input path="r_checkout" placeholder="checkoutDate"
-										required="true" data-error="Checkout is required." pattern="\d{4}-\d{2}-\d{2}"
-										title="Please enter a date in the format YYYY-mm-dd." />
+								<form:input id="checkout" path="r_checkout" placeholder="check Out" type="text"
+									required="true" data-error="Checkout is required." pattern="\d{4}-\d{2}-\d{2}"
+									title="Please enter a date in the format YYYY-mm-dd." />
+								<script>
+									$(function() {
+									$("#checkout").datepicker({
+										minDate : new Date(),
+										maxDate : '+365d',
+										dateFormat : 'yy-mm-dd',
+										showMonthAfterYear : true,
+										dayNamesMin : ['월', '화', '수', '목', '금', '토', '일' ], // 요일의 한글 형식.
+										monthNamesShort : ['1월', '2월', '3월', '4월', '5월', '6월', '7월',
+																	'8월', '9월', '10월', '11월', '12월' ] // 월의 한글 형식.
+										});
+									});
+								</script>		
 								</div>
 							</div>
 							<!-- end col -->
@@ -130,16 +156,8 @@
 		</div>
 		<!-- end container -->
 	</div>
+	<%@ include file="./inc/footer.jsp" %>		
 	<!-- end reservations-main -->
-	
- <%@ include file="./inc/footer.jsp" %>
-  <!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<!-- jQuery UI -->
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
-<!-- jQuery UI CSS -->
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 </body>
 </html>

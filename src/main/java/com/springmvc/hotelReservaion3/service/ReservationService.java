@@ -9,4 +9,6 @@ public interface ReservationService {
 	public void reservationInsert(ReservationDTO reservationDTO);
 	
 	public List <ReservationDTO> getAllReservation();
+	
+	
 }

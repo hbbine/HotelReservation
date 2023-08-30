@@ -6,11 +6,6 @@
   <%@ include file="./inc/header.jsp" %>
 </head>
 <body>
-	<div>
-		<img class="img-fluid"
-			src="/hotelReservaion3/resources/img/lobby2.jpg" alt="" />
-		<div class="container py-5"></div>
-	</div>
 	<!-- Details Right -->
 
 	<div class="details">

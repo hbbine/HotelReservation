@@ -3,13 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>eLEARNING - eLearning HTML Template</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
-
-    <!-- Favicon -->
+ <!-- Favicon -->
     <link href="${pageContext.request.contextPath}/resources/img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
@@ -30,8 +24,10 @@
 
     <!-- Template Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
+    
 </head>
 <body>
+
     <!-- Spinner Start -->
     <div id="spinner" class="bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -91,6 +87,16 @@
         </div>
     </nav>
     <!-- Navbar End -->
+    <!-- Header Start -->
+	<div>
+		<img class="img-fluid"
+			src="${pageContext.request.contextPath}/resources/img/lobby.jpg"
+			alt="" />
+		<div class="container py-5">
+			
+		</div>
+	</div>
+<!-- Header End -->
 <body>
 
 </body>
