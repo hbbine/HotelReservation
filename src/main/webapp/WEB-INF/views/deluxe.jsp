@@ -3,9 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <%@ include file="./inc/header.jsp" %>
+ 
 </head>
 <body>
+ <%@ include file="./inc/header.jsp" %>
 	<!-- Details Right -->
 
 	<div class="details">

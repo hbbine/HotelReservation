@@ -32,21 +32,18 @@ public class ReservaionController {
 		model.addAttribute("allReservaionList", allReservaionList);
 		
 		System.out.println();
-		
-		
-		
-		
+				
 		return "/reservationList";
 	}
 
 //예약하기
-	@GetMapping("/doReservation")
+	@GetMapping("/booking")
 	public String doReservation(Model model) {
 		model.addAttribute("reservationForm", new ReservationDTO());
-		return "/doReservation";
+		return "/booking";
 	}
 	
-	@RequestMapping(value = "/doReservation", method = RequestMethod.POST)
+	@RequestMapping(value = "/booking", method = RequestMethod.POST)
 	public String reservation(@ModelAttribute("reservationForm") ReservationDTO reservationDTO, HttpSession session, Model model) throws ParseException {
 		//reservationDTO.setM_id((String) session.getAttribute("m_id"));
 

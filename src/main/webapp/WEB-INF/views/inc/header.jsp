@@ -24,7 +24,7 @@
 
     <!-- Template Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
-    
+           
 </head>
 <body>
 
@@ -65,7 +65,7 @@
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Reservation</a>
                     <div class="dropdown-menu fade-down m-0">
                         <a href="${pageContext.request.contextPath}/reservationList" class="dropdown-item">예약상황</a>
-                        <a href="${pageContext.request.contextPath}/doReservation" class="dropdown-item">예약하기</a>
+                        <a href="${pageContext.request.contextPath}/booking" class="dropdown-item">예약하기</a>
                         <a href="${pageContext.request.contextPath}/reservation" class="dropdown-item">관리자페이지</a>
                         <a href="${pageContext.request.contextPath}/reservation" class="dropdown-item">관리자 로그아웃</a>
                       
