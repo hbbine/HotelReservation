@@ -81,9 +81,9 @@
                        
                     </div>
                 </div>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                <a href="${pageContext.request.contextPath}/login" class="nav-item nav-link">Login<i class="fa fa-arrow-right ms-3"></i></a>
             </div>
-            <a href="" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Join Now<i class="fa fa-arrow-right ms-3"></i></a>
+            <a href="${pageContext.request.contextPath}/join" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Join Now<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
     </nav>
     <!-- Navbar End -->

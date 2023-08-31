@@ -81,9 +81,9 @@
                        
                     </div>
                 </div>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                <a href="${pageContext.request.contextPath}/login" class="nav-item nav-link">Login<i class="fa fa-arrow-right ms-3"></i></a>
             </div>
-            <a href="" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Join Now<i class="fa fa-arrow-right ms-3"></i></a>
+            <a href="${pageContext.request.contextPath}/join" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Join Now<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
     </nav>
     <!-- Navbar End -->
@@ -99,8 +99,8 @@
                                 <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Welcome to REMERE</h5>
                                 <h1 class="display-3 text-white animated slideInDown">OUTDOOR OCEAN POOL</h1>
                                 <p class="fs-5 text-white mb-4 pb-2">하늘과 바다가 맞닿은 듯한 인피니티풀에서 지금껏 느껴보지 못한 영혼의 휴식을 경험해보시기 바랍니다.</p>
-                            <!--     <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read More</a>
-                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Join Now</a> -->
+                                <a href="${pageContext.request.contextPath}/about" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read More</a>
+                                <a href="${pageContext.request.contextPath}/join" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Join Now</a> 
                             </div>
                         </div>
                     </div>
@@ -115,8 +115,8 @@
                                 <h5 class="text-primary text-uppercase mb-3 animated slideInDown">REMERE hotel & resort</h5>
                                 <h1 class="display-3 text-white animated slideInDown">Every Special Moments in REMERE</h1>
                                 <p class="fs-5 text-white mb-4 pb-2">하늘 위의 작은 바다, 환상적인 오션뷰와 함께 달콤한 휴식을 즐기세요</p>
-                             <!--    <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read More</a>
-                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Join Now</a> -->
+                             	<a href="${pageContext.request.contextPath}/about" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read More</a>
+                                <a href="${pageContext.request.contextPath}/join" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Join Now</a> 
                             </div>
                         </div>
                     </div>

@@ -1,0 +1,21 @@
+package com.springmvc.hotelReservaion3.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.springmvc.dto.MemberDTO;
+import com.springmvc.mapper.MemberMapper;
+
+@Service
+public class MemberServiceImpl implements MemberService {
+	
+	@Autowired
+	private MemberMapper mapper;
+	
+	@Override
+	public void memberJoin(MemberDTO dto) throws Exception {
+		mapper.memberJoin(dto);
+		
+	}
+
+}

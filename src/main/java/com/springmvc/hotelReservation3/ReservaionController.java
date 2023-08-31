@@ -25,7 +25,7 @@ public class ReservaionController {
 	@Autowired
 	ReservationService service;
 	
-//예약 목록
+	//예약 목록
 	@GetMapping("/reservationList")
 	public String reservation(Model model) {
 		List<ReservationDTO> allReservaionList = service.getAllReservation();
@@ -36,7 +36,7 @@ public class ReservaionController {
 		return "/reservationList";
 	}
 
-//예약하기
+	//예약하기
 	@GetMapping("/booking")
 	public String doReservation(Model model) {
 		model.addAttribute("reservationForm", new ReservationDTO());
@@ -44,8 +44,10 @@ public class ReservaionController {
 	}
 	
 	@RequestMapping(value = "/booking", method = RequestMethod.POST)
-	public String reservation(@ModelAttribute("reservationForm") ReservationDTO reservationDTO, HttpSession session, Model model) throws ParseException {
-		//reservationDTO.setM_id((String) session.getAttribute("m_id"));
+	public String reservation(@ModelAttribute("reservationForm") ReservationDTO reservationDTO, HttpSession session,
+		Model model) throws ParseException {
+
+		// reservationDTO.setM_id((String) session.getAttribute("m_id"));
 
 		// 체크인 체크아웃 날짜간 차이를 구한다
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); // 내가 원하는 날짜 형식을 지정 (포맷)
@@ -53,27 +55,27 @@ public class ReservaionController {
 		Date endDate = formatter.parse(reservationDTO.getR_checkout()); // 체크아웃
 		long diff = endDate.getTime() - beginDate.getTime(); // 체크아웃 - 체크인 시간차이 
 		long diffDays = diff / (24 * 60 * 60 * 1000);// 날짜 계산 하루예약은 0이므로 +1해준다.
-		
+
 		System.out.println(diffDays);
 
 		String roomtype = reservationDTO.getR_type();
-		
+
 		System.out.println(roomtype);
-		
+
 		int roomPrice = 0;
-		if(roomtype.equals("1")) {
+		if (roomtype.equals("1")) {
 			roomPrice = 800000;
-		}else if(roomtype.equals("2")) {
+		} else if (roomtype.equals("2")) {
 			roomPrice = 500000;
-		}else {
+		} else {
 			roomPrice = 200000;
 		}
 		int totalPrice = roomPrice * (int) diffDays;
 		reservationDTO.setR_price(totalPrice);
-		
+
 		System.out.println(totalPrice);
-		
-		//결제승인
+
+		// 결제승인
 		reservationDTO.setCONFIRMATION_PAYMENT(false);
 
 		service.reservationInsert(reservationDTO);
