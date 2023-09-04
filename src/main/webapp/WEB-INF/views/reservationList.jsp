@@ -134,7 +134,7 @@ function nextCalendar(){
 }
 </script>
 <body>
-<%@ include file="./inc/header.jsp" %>
+<%@ include file="./inc/loginHeader.jsp" %>
 <div class="container">
   <table id="calendar" align="center">
     <tr>

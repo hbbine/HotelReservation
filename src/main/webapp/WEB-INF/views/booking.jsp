@@ -36,7 +36,7 @@
 
 <body>
 
-	<%@ include file="./inc/header.jsp" %>
+	<%@ include file="./inc/loginHeader.jsp" %>
 
 	<div class="container">
 		<div style=" display:flex; justify-content: center;">
@@ -54,8 +54,8 @@
 							
 							<div class="col-12">
 								<div class="form-floating">
-									<label for="memberID">Member ID</label>
-									<form:input path="m_id" placeholder="memberID" style="width: 100%;"
+									<label for="m_id">Member ID</label>
+									<form:input path="m_id" value="${ m_id }" readonly="true" style="width: 100%;"
 										required="true" data-error="ID is required." />
 										
 								</div>
@@ -63,13 +63,13 @@
 							
 							<div class="col-12">
 								<div class="form-floating">
-									<label for="checkIn">Check In</label>
-									<form:input id ="checkin"  path="r_checkin" placeholder="check In" type="text" style="width: 100%;"
+									<label for=r_checkin>Check In</label>
+									<form:input id ="r_checkin"  path="r_checkin" placeholder="check In" type="text" style="width: 100%;"
 										required="true" data-error="Checkin is required" pattern="\d{4}-\d{2}-\d{2}"
 										title="Please enter a date in the format YYYY-mm-dd." />
 									<script>
 										$(function() {
-										$("#checkin").datepicker({
+										$("#r_checkin").datepicker({
 											minDate : new Date(),
 											maxDate : '+365d',
 											dateFormat : 'yy-mm-dd',
@@ -85,13 +85,13 @@
 							
 							<div class="col-12">
 								<div class="form-floating">
-									<label for="checkOut">Check Out</label>
-									<form:input id="checkout" path="r_checkout" placeholder="check Out" type="text" style="width: 100%;"
+									<label for="r_checkout">Check Out</label>
+									<form:input id="r_checkout" path="r_checkout" placeholder="check Out" type="text" style="width: 100%;"
 									required="true" data-error="Checkout is required." pattern="\d{4}-\d{2}-\d{2}"
 									title="Please enter a date in the format YYYY-mm-dd." />
 									<script>
 										$(function() {
-										$("#checkout").datepicker({
+										$("#r_checkout").datepicker({
 											minDate : new Date(),
 											maxDate : '+365d',
 											dateFormat : 'yy-mm-dd',
@@ -107,8 +107,8 @@
 							
 							<div class="col-12">
 								<div class="form-floating">
-									<label for="roomtype">Room Type</label>
-									<form:select path="r_type" class="roomType" required="true" style="width: 100%;" >
+									<label for="r_type">Room Type</label>
+									<form:select path="r_type" class="r_type" required="true" style="width: 100%;" >
 										<form:option value="1">RoyalSweet</form:option>
 										<form:option value="2">Deluxe</form:option>
 										<form:option value="3">Standard</form:option>
@@ -118,18 +118,18 @@
 							
 							<div class="col-12">
 								<div class="form-floating">
-									<label for="adults">Adults</label>
-									<select id="r_adults" name="r_adults" style="width: 100%;" class="r_adults" required="true" style="width: 100%;">
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-									</select>	
+									<label for="r_adults">Adults</label>
+										<form:select path="r_adults" class="r_adults" style="width: 100%;" required="true">
+											<form:option value="1">1</form:option>
+											<form:option value="2">2</form:option>
+											<form:option value="3">3</form:option>
+									</form:select>
 								</div>
 							</div>
 							
 							<div class="col-12">
 								<div class="form-floating">
-									<label for="kids">Kids</label>
+									<label for="r_kids">Kids</label>
 									<form:select path="r_kids" class="r_kids" style="width: 100%;"
 											required="true">
 											<form:option value="1">1</form:option>

@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<%@ include file="./inc/header.jsp" %>
+<%@ include file="./inc/loginHeader.jsp" %>
 
 <!-- Categories Start -->
     

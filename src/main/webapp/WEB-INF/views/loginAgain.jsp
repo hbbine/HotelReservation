@@ -7,6 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<style>
+	.error-message{
+	color:block;
+	font-weight: bold;
+	fond-size: 16px;
+	text-align:center;
+	}
+</style>
 </head>
 <body>
 <%@ include file="./inc/header.jsp" %>
@@ -17,6 +25,8 @@
 				<div class="reservation-form">
 						<div class="row g-3">
 						<h2 class="block-title text-center">Login</h2>
+						<br><br>
+						<p class="error-message">로그인 정보가 틀렸습니다. 다시 입력해 주세요</p>
 						<form:form modelAttribute="loginForm" method="post" class="reservations-box" >
 							<div class="col-12 ">
 								<div class="form-floating">

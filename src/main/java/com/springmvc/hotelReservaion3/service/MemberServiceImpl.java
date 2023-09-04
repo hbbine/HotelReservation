@@ -12,10 +12,27 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberMapper mapper;
 	
+	//회원가입
 	@Override
 	public void memberJoin(MemberDTO dto) throws Exception {
 		mapper.memberJoin(dto);
 		
 	}
+
+	//로그인
+	@Override
+	public MemberDTO Login(MemberDTO dto) {
+		MemberDTO DTO = mapper.Login(dto);
+		return DTO;
+	}
+
+	//중복체크
+	@Override
+	public int idCheck(String memberId) {
+		
+		return mapper.idCheck(memberId);
+	}
+
+
 
 }

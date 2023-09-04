@@ -81,9 +81,14 @@
                        
                     </div>
                 </div>
-                <a href="${pageContext.request.contextPath}/login" class="nav-item nav-link">Login<i class="fa fa-arrow-right ms-3"></i></a>
             </div>
-            <a href="${pageContext.request.contextPath}/join" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Join Now<i class="fa fa-arrow-right ms-3"></i></a>
+             <div class="nav-item dropdown">
+               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><%= request.getAttribute("m_id") %>님 환영합니다!</a>
+                <div class="dropdown-menu fade-down m-0">
+                    <a href="${pageContext.request.contextPath}/myPage" class="dropdown-item">My Page</a>    
+                </div>
+            </div>
+            <a href="${pageContext.request.contextPath}/logout" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Logout<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
     </nav>
     <!-- Navbar End -->

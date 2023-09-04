@@ -4,8 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.springmvc.dto.MemberDTO;
 import com.springmvc.hotelReservaion3.service.ReservationService;
 import com.springmvc.hotelReservation3.dto.ReservationDTO;
 
@@ -38,8 +39,13 @@ public class ReservaionController {
 
 	//예약하기
 	@GetMapping("/booking")
-	public String doReservation(Model model) {
+	public String doReservation(Model model, ReservationDTO reservationDTO, HttpServletRequest request) {
 		model.addAttribute("reservationForm", new ReservationDTO());
+		MemberDTO memberdto = (MemberDTO) request.getSession().getAttribute("LoginDTO");
+		
+		model.addAttribute("m_id", memberdto.getM_id());
+		System.out.println("세션 값 확인 : " + memberdto.getM_id());
+//		reservationDTO.setM_id((String) session.getAttribute("m_id"));
 		return "/booking";
 	}
 	
@@ -47,7 +53,8 @@ public class ReservaionController {
 	public String reservation(@ModelAttribute("reservationForm") ReservationDTO reservationDTO, HttpSession session,
 		Model model) throws ParseException {
 
-		// reservationDTO.setM_id((String) session.getAttribute("m_id"));
+		//reservationDTO.setM_id((String) session.getAttribute("m_id"));
+		
 
 		// 체크인 체크아웃 날짜간 차이를 구한다
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); // 내가 원하는 날짜 형식을 지정 (포맷)
@@ -78,12 +85,12 @@ public class ReservaionController {
 		// 결제승인
 		reservationDTO.setCONFIRMATION_PAYMENT(false);
 
+		//reservationDTO.setM_id(m_id);
 		service.reservationInsert(reservationDTO);
 		model.addAttribute("dto", reservationDTO);
 		return "redirect:/reservationList";
 
 	}
 	
-//
 
 }
