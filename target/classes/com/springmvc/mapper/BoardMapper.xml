@@ -1,0 +1,18 @@
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springmvc.mapper.BoardMapper">
+	
+	Insert
+	<insert id="insertBoard" parameterType="com.springmvc.hotelReservation3.dto.BoardDTO">
+    <![CDATA[
+    insert into Board
+    (m_id, m_password, b_content, b_viewcnt)
+    select m.m_id, m.m_password, b.b_content, b.b_viewcnt
+    from board b
+    INNER JOIN member m ON b.m_id = m.m_id;
+    ]]>
+	</insert>
+	
+	
+	
+</mapper> -->

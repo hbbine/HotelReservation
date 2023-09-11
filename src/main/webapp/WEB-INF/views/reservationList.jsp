@@ -133,8 +133,33 @@ function nextCalendar(){
 	buildCalendar();
 }
 </script>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!-- 로그인 유무에 따른 헤더 조건식 -->
+<c:choose>
+    <c:when test="${empty sessionScope.m_id}">
+        <%-- 세션 값이 존재하지 않는 경우 --%>
+        <%@ include file="./inc/header.jsp" %>
+    </c:when>
+    <c:otherwise>
+        <%-- 세션 값이 존재하지 하는 경우 --%>
+        <%@ include file="./inc/loginHeader.jsp" %>
+    </c:otherwise>
+</c:choose>      
 <body>
-<%@ include file="./inc/loginHeader.jsp" %>
+
+<table>
+ <c:forEach items="${allReservationList}" var="reservation">
+            <tr>
+                <td>${reservation.r_checkin}</td>
+                <td>${reservation.r_type}</td>
+            </tr>
+        </c:forEach>
+
+
+</table>
+
 <div class="container">
   <table id="calendar" align="center">
     <tr>
@@ -156,6 +181,9 @@ function nextCalendar(){
 <%@ include file="./inc/footer.jsp" %>
 <script type="text/javascript">
   buildCalendar();
+  
+  
+  
 </script>
 </body>
 </html>

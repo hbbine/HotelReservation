@@ -1,4 +1,4 @@
-package com.springmvc.dto;
+package com.springmvc.hotelReservation3.dto;
 
 public class MemberDTO {
 

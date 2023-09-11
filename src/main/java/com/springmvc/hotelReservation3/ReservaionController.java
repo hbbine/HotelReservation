@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.springmvc.dto.MemberDTO;
 import com.springmvc.hotelReservaion3.service.ReservationService;
+import com.springmvc.hotelReservation3.dto.MemberDTO;
 import com.springmvc.hotelReservation3.dto.ReservationDTO;
 
 @Controller
@@ -25,14 +27,13 @@ public class ReservaionController {
 
 	@Autowired
 	ReservationService service;
+	private String userID;
 	
 	//예약 목록
 	@GetMapping("/reservationList")
 	public String reservation(Model model) {
 		List<ReservationDTO> allReservaionList = service.getAllReservation();
 		model.addAttribute("allReservaionList", allReservaionList);
-		
-		System.out.println();
 				
 		return "/reservationList";
 	}
@@ -43,10 +44,21 @@ public class ReservaionController {
 		model.addAttribute("reservationForm", new ReservationDTO());
 		MemberDTO memberdto = (MemberDTO) request.getSession().getAttribute("LoginDTO");
 		
-		model.addAttribute("m_id", memberdto.getM_id());
-		System.out.println("세션 값 확인 : " + memberdto.getM_id());
+	    if (memberdto != null) {
+	        // 로그인된 상태이므로 예약 페이지를 표시
+	        model.addAttribute("m_id", memberdto.getM_id());
+	        System.out.println("세션 값 확인: " + memberdto.getM_id());
+	        return "booking";
+	    } else {
+	    	
+	        // 로그인되지 않은 상태이므로 로그인 페이지로 이동
+	        return "redirect:/login";
+	    }
+		
+		
+//		model.addAttribute("m_id", memberdto.getM_id());
+//		System.out.println("세션 값 확인 : " + memberdto.getM_id());
 //		reservationDTO.setM_id((String) session.getAttribute("m_id"));
-		return "/booking";
 	}
 	
 	@RequestMapping(value = "/booking", method = RequestMethod.POST)
@@ -91,6 +103,8 @@ public class ReservaionController {
 		return "redirect:/reservationList";
 
 	}
+	
+
 	
 
 }

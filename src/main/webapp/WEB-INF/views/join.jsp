@@ -119,7 +119,7 @@
                 if(result != 'fail'){
                     $('.id_input_ok').css("display", "inline-block");
                     $('.id_input_already').css("display", "none");
-                    $('#submit').prop('disabled', false); //중복이 아닐경우 경우 제출 가능
+                    $('#submit').prop('disabled', false); //중복이 아닐경우 경우 제출 가능 , 버튼
                 } else {
                     $('.id_input_already').css("display", "inline-block");
                     $('.id_input_ok').css("display", "none");

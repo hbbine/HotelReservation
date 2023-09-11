@@ -47,7 +47,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="${pageContext.request.contextPath}/index" class="nav-item nav-link active">Home</a>
+                <a href="${pageContext.request.contextPath}/loginConfirm" class="nav-item nav-link active">Home</a>
                 <a href="${pageContext.request.contextPath}/about" class="nav-item nav-link">About</a>
       
                 
@@ -73,13 +73,13 @@
                 </div>
                 
                   <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Dinning</a>
-                    <div class="dropdown-menu fade-down m-0">
+                    <a href="${pageContext.request.contextPath}/writeBoard" class="nav-item nav-link">Q & A</a>
+                <!--     <div class="dropdown-menu fade-down m-0">
                         <a href="team.html" class="dropdown-item">premium</a>
                         <a href="testimonial.html" class="dropdown-item">family</a>
                         <a href="testimonial.html" class="dropdown-item">couple</a>
                        
-                    </div>
+                    </div> -->
                 </div>
             </div>
              <div class="nav-item dropdown">

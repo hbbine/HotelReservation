@@ -3,6 +3,8 @@ package com.springmvc.mapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
 import com.springmvc.hotelReservation3.dto.ReservationDTO;
 
 @Mapper
@@ -13,6 +15,7 @@ public interface ReservationMapper {
 	
 	//read table
 	public List<ReservationDTO> getAllReservation();
+	
 	
 	
 	

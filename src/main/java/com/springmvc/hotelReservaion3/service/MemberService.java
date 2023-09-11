@@ -1,6 +1,6 @@
 package com.springmvc.hotelReservaion3.service;
 
-import com.springmvc.dto.MemberDTO;
+import com.springmvc.hotelReservation3.dto.MemberDTO;
 
 public interface MemberService {
 	

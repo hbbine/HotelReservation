@@ -6,7 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <!-- 달력 오픈소스 datepicker 시작 -->
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
@@ -32,7 +31,19 @@
     }
 </style>
 
+<!-- 로그인 유무에 따른 헤더 조건식 -->
+<c:choose>
+    <c:when test="${empty sessionScope.m_id}">
+        <%-- 세션 값이 존재하지 않는 경우 --%>
+        <a href="${pageContext.request.contextPath}/login" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">
+    </c:when>
+    <c:otherwise>
+        <%-- 세션 값이 존재하지 하는 경우 --%>
+        <a href="${pageContext.request.contextPath}/booking" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">
+    </c:otherwise>
+</c:choose>      
 </head>
+
 
 <body>
 

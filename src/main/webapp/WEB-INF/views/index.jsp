@@ -3,7 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
- <!-- Favicon -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!-- Favicon -->
     <link href="${pageContext.request.contextPath}/resources/img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
@@ -24,11 +26,9 @@
 
     <!-- Template Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
-           
-</head>
-<body>
 
-    <!-- Spinner Start -->
+<body>
+ <!-- Spinner Start -->
     <div id="spinner" class="bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
             <span class="sr-only">Loading...</span>
@@ -73,13 +73,7 @@
                 </div>
                 
                   <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Dinning</a>
-                    <div class="dropdown-menu fade-down m-0">
-                        <a href="team.html" class="dropdown-item">premium</a>
-                        <a href="testimonial.html" class="dropdown-item">family</a>
-                        <a href="testimonial.html" class="dropdown-item">couple</a>
-                       
-                    </div>
+                    <a href="${pageContext.request.contextPath}/writeBoard" class="nav-item nav-link">Q & A</a>
                 </div>
                 <a href="${pageContext.request.contextPath}/login" class="nav-item nav-link">Login<i class="fa fa-arrow-right ms-3"></i></a>
             </div>

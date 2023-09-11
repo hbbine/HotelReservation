@@ -4,7 +4,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
-import com.springmvc.dto.MemberDTO;
+import com.springmvc.hotelReservation3.dto.MemberDTO;
 
 @Mapper
 public interface MemberMapper {
