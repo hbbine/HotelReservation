@@ -54,40 +54,40 @@
                     <form:form modelAttribute="boardForm" method="post" class="reservations-box">
                         <div class="col-12 ">
                             <div class="form-floating">
-                                <form:hidden path="b_id" placeholder="boardID" style="width: 100%;"
+                                <form:hidden path="b_id" value="${board.b_id}" placeholder="boardID" style="width: 100%;"
                                     required="true" data-error="ID is required." />
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
                                 <label for="m_id">Member ID</label>
-                                <form:input path="m_id" value="${m_id}" readonly = "true" style="width: 100%;"
+                                <form:input path="m_id" value="${board.m_id}" readonly = "true" style="width: 100%;"
                                     required="true" data-error="ID is required." />
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
-                                <form:hidden path="m_password" value="${m_password}"  readonly = "true" placeholder="memberPassword" style="width: 100%;"
+                                <form:hidden path="m_password" value="${board.m_password}"  readonly = "true" placeholder="memberPassword" style="width: 100%;"
                                     required="true" data-error="Password is required." />
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
                                 <label for="b_title">Title</label>
-                                <form:input path="b_title" 
+                                <form:input path="b_title" value="${board.b_title}"
                                     style="width: 100%; " required="true" data-error="Title is required."></form:input>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
                                 <label for="b_content">Content</label>
-                                <form:textarea path="b_content" 
+                                <form:textarea path="b_content"  value="${board.b_content}"
                                     style="width: 100%; height: 200px;" required="true" data-error="Content is required."></form:textarea>
                             </div>
                         </div>
                         <div class="col-12">
                             <button class="btn btn-primary w-100 py-3" type="submit" value="submit" id="submit">
-                                Write</button>
+                                수정 완료</button>
                         </div>
                     </form:form>
                 </div>

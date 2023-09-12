@@ -73,7 +73,7 @@
                 </div>
                 
                   <div class="nav-item dropdown">
-                    <a href="${pageContext.request.contextPath}/writeBoard" class="nav-item nav-link">Q & A</a>
+                    <a href="${pageContext.request.contextPath}/boardList" class="nav-item nav-link">Q & A</a>
                 <!--     <div class="dropdown-menu fade-down m-0">
                         <a href="team.html" class="dropdown-item">premium</a>
                         <a href="testimonial.html" class="dropdown-item">family</a>
@@ -83,7 +83,7 @@
                 </div>
             </div>
              <div class="nav-item dropdown">
-               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><%= request.getAttribute("m_id") %>님 환영합니다!</a>
+               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><%= session.getId() %>님 환영합니다!</a>
                 <div class="dropdown-menu fade-down m-0">
                     <a href="${pageContext.request.contextPath}/myPage" class="dropdown-item">My Page</a>    
                 </div>

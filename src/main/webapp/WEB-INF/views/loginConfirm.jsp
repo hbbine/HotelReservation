@@ -72,14 +72,8 @@
                     </div>
                 </div>
                 
-                  <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Dinning</a>
-                    <div class="dropdown-menu fade-down m-0">
-                        <a href="team.html" class="dropdown-item">premium</a>
-                        <a href="testimonial.html" class="dropdown-item">family</a>
-                        <a href="testimonial.html" class="dropdown-item">couple</a>
-                       
-                    </div>
+                <div class="nav-item dropdown">
+                    <a href="${pageContext.request.contextPath}/boardList" class="nav-item nav-link">Q & A</a>
                 </div>
                 
             </div>

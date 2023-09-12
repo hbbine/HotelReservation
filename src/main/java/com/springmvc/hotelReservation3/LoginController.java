@@ -39,9 +39,9 @@ public class LoginController {
 			 String mID = Login.getM_id();
 			 System.out.println("m_id: " + mID); 
 			 model.addAttribute("m_id", mID); // 로그인 정보를 모델에 추가
-			 return "redirect:/loginConfirm"; 
+			 return "/loginConfirm"; 
 		  }else {
-			  return "redirect:/loginAgain"; 
+			  return "/loginAgain"; 
 		  } 
 	  }
 	  

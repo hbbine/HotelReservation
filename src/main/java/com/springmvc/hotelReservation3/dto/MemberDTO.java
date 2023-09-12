@@ -3,13 +3,14 @@ package com.springmvc.hotelReservation3.dto;
 public class MemberDTO {
 
 	/*
-	CREATE TABLE member (
+		CREATE TABLE member (
     m_id VARCHAR(30) NOT NULL,
     m_password VARCHAR(30) NOT NULL,
     m_name VARCHAR(30) NOT NULL,
     m_email VARCHAR(30) DEFAULT NULL,
-    m_tel VARCHAR(30) NOT NULL
-) DEFAULT CHARSET=utf8mb4;
+    m_tel VARCHAR(30) NOT NULL,
+    m_authority VARCHAR(30) NOT NULL DEFAULT 'isAuthenticated'
+	) DEFAULT CHARSET=utf8mb4;
 	 */
 	
 	private String m_id;
@@ -17,6 +18,7 @@ public class MemberDTO {
 	private String m_name;
 	private String m_email;
 	private String m_tel;
+	private String m_authority;
 	
 	public MemberDTO() {
 		super();
@@ -61,6 +63,15 @@ public class MemberDTO {
 	public void setM_tel(String m_tel) {
 		this.m_tel = m_tel;
 	}
+
+	public String getM_authority() {
+		return m_authority;
+	}
+
+	public void setM_authority(String m_authority) {
+		this.m_authority = m_authority;
+	}
+	
 	
 	
 	

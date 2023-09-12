@@ -73,7 +73,7 @@
                 </div>
                 
                   <div class="nav-item dropdown">
-                    <a href="${pageContext.request.contextPath}/writeBoard" class="nav-item nav-link">Q & A</a>
+                    <a href="${pageContext.request.contextPath}/boardList" class="nav-item nav-link">Q & A</a>
                 </div>
                 <a href="${pageContext.request.contextPath}/login" class="nav-item nav-link">Login<i class="fa fa-arrow-right ms-3"></i></a>
             </div>

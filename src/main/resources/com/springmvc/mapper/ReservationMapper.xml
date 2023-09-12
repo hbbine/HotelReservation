@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.springmvc.mapper.ReservationMapper">
-	
 	<!-- Create -->
 	<insert id="reservationInsert" parameterType="com.springmvc.hotelReservation3.dto.ReservationDTO">
     <![CDATA[
@@ -20,6 +19,5 @@
     <![CDATA[
     select * from reservation order by r_checkin ASC, r_type ASC
     ]]>
-	</select>
-	
+	</select> 		
 </mapper>

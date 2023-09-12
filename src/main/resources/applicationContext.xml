@@ -1,8 +1,8 @@
 <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-    <property name="driverClassName" value="org.mariadb.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://192.168.23.67:3306/root?serverTimezone=Asia/Seoul&amp;useSSL=false&amp;characterEncoding=utf8"/>
-            <property name="username" value="아이디"/>
-                <property name="password" value="비밀번호"/>
-                    </bean>
+	<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
+	<property name="url" value="jdbc:mysql://192.168.23.67:3306/root?serverTimezone=Asia/Seoul&amp;useSSL=false&amp;characterEncoding=utf8" />
+	<property name="username" value="아이디" />
+	<property name="password" value="비밀번호" />
+</bean>
                     
                    

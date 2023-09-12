@@ -73,13 +73,7 @@
                 </div>
                 
                   <div class="nav-item dropdown">
-                    <a href="${pageContext.request.contextPath}/writeBoard" class="nav-item nav-link">Q & A</a>
-               <!--      <div class="dropdown-menu fade-down m-0">
-                        <a href="team.html" class="dropdown-item">premium</a>
-                        <a href="testimonial.html" class="dropdown-item">family</a>
-                        <a href="testimonial.html" class="dropdown-item">couple</a>
-                       
-                    </div> -->
+                    <a href="${pageContext.request.contextPath}/boardList" class="nav-item nav-link">Q & A</a>
                 </div>
                 <a href="${pageContext.request.contextPath}/login" class="nav-item nav-link">Login<i class="fa fa-arrow-right ms-3"></i></a>
             </div>
