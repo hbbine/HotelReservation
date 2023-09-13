@@ -43,7 +43,15 @@
 
 <body>
 
-	<%@ include file="./inc/header.jsp" %>
+<%@ include file="./inc/header.jsp" %>
+	<!-- Header Start -->
+	<div>
+		<img class="img-fluid"
+			src="${pageContext.request.contextPath}/resources/img/lobby3.jpg"
+			alt="" />
+		<div class="container py-5"></div>
+	</div>
+	<!-- Header End -->
 
 	<div class="container">
 		<div style=" display:flex; justify-content: center;">

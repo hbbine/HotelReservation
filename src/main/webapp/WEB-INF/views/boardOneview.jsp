@@ -44,7 +44,15 @@
 
 </head>
 <body>
-	<%@ include file="./inc/header.jsp"%>
+<%@ include file="./inc/header.jsp" %>
+	<!-- Header Start -->
+	<div>
+		<img class="img-fluid"
+			src="${pageContext.request.contextPath}/resources/img/lobby3.jpg"
+			alt="" />
+		<div class="container py-5"></div>
+	</div>
+	<!-- Header End -->
 
 	<div class="container">
     <div style="display: flex; justify-content: center;">
@@ -61,7 +69,7 @@
 							<tr>
 								<td colspan="5">
 									<div class="form-group">
-										<textarea class="form-control" rows="10">${board.b_content}</textarea>
+										<textarea class="form-control" rows="10" readonly="true">${board.b_content}</textarea>
 									</div>
 								</td>
 							</tr>
@@ -80,14 +88,25 @@
 								class="btn btn-custom w-45"> 수정 </a>
 							<a href="${pageContext.request.contextPath}/deleteBoard?b_id=${board.b_id}"
 								class="btn btn-custom w-45"> 삭제 </a>	
+								
+							
 						</div>
 					</div>
+					<div id="alertMessage" style="display:none;"></div>
 				</div>
 			</div>
     </div>
 </div>
 	<%@ include file="./inc/footer.jsp"%>
-
+<script>
+$(document).ready(function() {
+    // 경고 스크립트가 설정되어 있는 경우 실행
+    var alertScript = "${param.alertScript}";
+    if (alertScript && alertScript.trim() !== "") {
+        eval(alertScript);
+    }
+});
+</script>
 	
 </body>
 </html>

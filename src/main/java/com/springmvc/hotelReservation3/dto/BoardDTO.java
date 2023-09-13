@@ -10,7 +10,8 @@ public class BoardDTO {
     b_title varchar(30) not null,
     b_content TEXT NOT NULL,
     b_date timestamp,
-    b_viewcnt INT NOT NULL
+    b_viewcnt INT NOT NULL,
+    is_admin BOOLEAN NOT NULL DEFAULT '0'
 	) DEFAULT CHARSET=utf8mb4;
 	 */
 	
@@ -21,6 +22,7 @@ public class BoardDTO {
 	private String b_content;
 	private String b_date;
 	private int b_viewcnt;
+	private boolean is_admin;
 	
 	public BoardDTO() {
 		super();
@@ -80,6 +82,14 @@ public class BoardDTO {
 
 	public void setB_viewcnt(int b_viewcnt) {
 		this.b_viewcnt = b_viewcnt;
+	}
+
+	public boolean isIs_admin() {
+		return is_admin;
+	}
+
+	public void setIs_admin(boolean is_admin) {
+		this.is_admin = is_admin;
 	}
 
 	

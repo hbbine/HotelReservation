@@ -48,6 +48,12 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
+	@Override
+	public void updateAdminPost(String m_id) {
+		mapper.updateAdminPost(m_id);
+		
+	}
+
 
 	
 	

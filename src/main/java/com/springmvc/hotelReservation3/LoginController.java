@@ -39,7 +39,7 @@ public class LoginController {
 			 String mID = Login.getM_id();
 			 System.out.println("로그인 m_id: " + mID); 
 			 model.addAttribute("m_id", mID); // 로그인 정보를 모델에 추가
-			 return "/loginConfirm"; 
+			 return "/index"; 
 		  }else {
 			  return "/loginAgain"; 
 		  } 
@@ -60,17 +60,10 @@ public class LoginController {
 			  if(Login != null) { //로그인 성공
 				 session.setAttribute("LoginDTO", Login);
 				 model.addAttribute("m_id", Login.getM_id()); // 로그인 정보를 모델에 추가
-				 return "redirect:/loginConfirm"; 
+				 return "redirect:/index"; 
 			  } else {
 				  return "loginAgain";  
 			  }
-	}
-	  
-	 //로그인 후 화면
-	@GetMapping("/loginConfirm")
-	public String requestLoginConfirmPage() {
-			
-		return"loginConfirm";
 	}
 	
 	//로그아웃

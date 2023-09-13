@@ -35,8 +35,17 @@ public class BoardController {
 		model.addAttribute("boardForm", new BoardDTO());
 		MemberDTO memberdto = (MemberDTO) request.getSession().getAttribute("LoginDTO");
 		
+		String admin = null;
+	
 	    if (memberdto != null) {
-	        // 로그인된 상태이므로 예약 페이지를 표시
+	    	
+	    	//관리자인경우 따로 표시해서 모델에 넘김
+	    	if(memberdto.getM_id().equals("admin")) {
+				admin = memberdto.getM_id();
+			}
+	    	model.addAttribute("admin", admin);
+	    	
+	        // 로그인된 상태이므로 글쓰기페이지를 표시
 	        model.addAttribute("m_id", memberdto.getM_id());
 	        model.addAttribute("m_password", memberdto.getM_password());
 	        
@@ -52,9 +61,21 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/writeBoard", method = RequestMethod.POST) //화면 불러오고 나서 다시 입력할 값들
-	public String insertBoard(@ModelAttribute("boardForm") BoardDTO boarddto,MemberDTO memberdto, HttpSession session,
+	public String insertBoard(@ModelAttribute("boardForm") BoardDTO boarddto, HttpSession session,
 		HttpServletRequest request,	Model model) throws Exception {
 		
+		//현재 로그인 정보를 MemberDTO에 담아서 가져옴
+		MemberDTO memberdto = (MemberDTO) session.getAttribute("LoginDTO");
+	    String m_id = memberdto.getM_id();
+		
+		//만약 관리자 아이디라면 post에 권한 추가
+		if(m_id.equals("admin")) { 
+			service.updateAdminPost(m_id);
+		}
+		
+		// 게시물 작성자 설정
+	    boarddto.setM_id(m_id);
+	    
 		service.insertBoard(boarddto);
 		model.addAttribute("dto", boarddto);
 		
@@ -110,35 +131,34 @@ public class BoardController {
 	
 /* -------------------------원글 삭제----------------------------*/	
 	
-	@GetMapping(value = "/deleteBoard") //화면 불러오고 나서 다시 입력할 값들
-	public String deleteBoard(Model model, @RequestParam("b_id") int b_id) throws Exception {
-		service.deleteBoard(b_id);
-		
-		return "redirect:/boardList";	
+	@GetMapping(value = "/deleteBoard") 
+	public String deleteBoard(Model model, @RequestParam("b_id") int b_id, HttpServletRequest request) throws Exception {
+		//지금 로그인된 세션 정보
+	    MemberDTO memberdto = (MemberDTO) request.getSession().getAttribute("LoginDTO");
+	    
+	    //b_id를 통해 글쓴사람 id를 알아냄
+	    BoardDTO boarddto = service.boardoneView(b_id);
+	    
+	    //비회원인경우
+	    if(memberdto == null) {
+	    	 String alertScript = "alert('로그인 후에 삭제할 수 있습니다.');";
+	         model.addAttribute("alertScript", alertScript);
+	         return "redirect:/boardOneview?b_id=" + b_id;
+	    }
+	    
+	    //회원인경우, 게시글을 작성한 사용자와 현재 로그인한 사용자의 ID가 같을 때나 관리자일때 삭제
+	    if (boarddto != null && boarddto.getM_id() != null && (boarddto.getM_id().equals(memberdto.getM_id()) || memberdto.getM_id().equals("admin"))) {
+	        service.deleteBoard(b_id); 
+	        System.out.println("글쓴이("+ boarddto.getM_id() + ")와 로그인id(" + memberdto.getM_id() + ")가 같아서 삭제완료");
+	        return "redirect:/boardList";    
+	    } else {
+	    	 String alertScript = "alert('삭제 권한이 없습니다');";
+	         model.addAttribute("alertScript", alertScript);
+	         
+	    	System.out.println("글쓴이("+ boarddto.getM_id() + ")와 로그인id(" + memberdto.getM_id() + ")가 달라서 삭제불가능");
+	        return "redirect:/boardOneview?b_id=" + b_id;
+	    }
 	}
-	
-	
 }
 
-	
-	
-/*
- * (value = "/deleteCheck", method = RequestMethod.POST) public String
- * deleteBoard(Model model, @RequestParam("b_id") int
- * b_id, @RequestParam("password") String password, HttpServletRequest request,
- * HttpSession session) { BoardDTO boarddto = service.boardoneView(b_id); String
- * id = boarddto.getM_id(); String sessionid = (String)
- * session.getAttribute("id");
- * 
- * if (sessionid != null && sessionid.equals(id)) { if
- * (password.equals(boarddto.getM_password())) { service.deleteBoard(b_id);
- * return "redirect:/boardList"; // 삭제 성공 시 boardList로 이동 } else { return
- * "redirect:/deleteCheck?b_id=" + b_id + "&error=true"; // 비밀번호 불일치 시 에러 페이지로
- * 이동 } } else { return "redirect:/deleteCheck?b_id=" + b_id ; // 세션 아이디 불일치 시
- * 에러 페이지로 이동 } }
- * 
- * @GetMapping("/deleteCheck") public String deleteBoard(@RequestParam("b_id")
- * int b_id, Model model) { BoardDTO boarddto = service.boardoneView(b_id);
- * model.addAttribute("boarddto", boarddto); return"deleteCheck"; } }
- */
 

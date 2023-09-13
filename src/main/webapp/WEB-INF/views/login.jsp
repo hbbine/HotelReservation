@@ -9,7 +9,27 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@ include file="./inc/header.jsp" %>
+ <%-- 로그인 정보가 있는 경우 --%>
+<c:if test="${not empty sessionScope.LoginDTO}">
+    <%-- 로그인 헤더를 출력합니다. --%>
+    <jsp:include page="./inc/loginHeader.jsp" />
+</c:if>
+
+<%-- 로그인 정보가 없는 경우 --%>
+<c:if test="${empty sessionScope.LoginDTO}">
+    <%-- 일반 헤더를 출력합니다. --%>
+    <jsp:include page="./inc/header.jsp" />
+</c:if>    
+<!-- Header Start -->
+	<div>
+		<img class="img-fluid"
+			src="${pageContext.request.contextPath}/resources/img/lobby3.jpg"
+			alt="" />
+		<div class="container py-5">
+			
+		</div>
+	</div>
+<!-- Header End -->
 
 <div class="container">
 		<div style=" display:flex; justify-content: center;">

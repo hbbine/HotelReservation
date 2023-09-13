@@ -25,5 +25,6 @@ public interface BoardService {
 	//게시판 삭제
 	void deleteBoard(int b_id);
 
-
+	//관리자 게시글 업데이트
+	void updateAdminPost(String m_id);
 }

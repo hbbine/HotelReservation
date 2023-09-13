@@ -83,7 +83,12 @@
                 </div>
             </div>
              <div class="nav-item dropdown">
-               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><%= session.getId() %>님 환영합니다!</a>
+             
+              <%-- 세션에서 아이디 추출 --%>
+              <%
+              	String username = (String) session.getAttribute("m_id");
+              %>
+               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><%= username %>님 환영합니다!</a>
                 <div class="dropdown-menu fade-down m-0">
                     <a href="${pageContext.request.contextPath}/myPage" class="dropdown-item">My Page</a>    
                 </div>
@@ -92,16 +97,6 @@
         </div>
     </nav>
     <!-- Navbar End -->
-    <!-- Header Start -->
-	<div>
-		<img class="img-fluid"
-			src="${pageContext.request.contextPath}/resources/img/lobby3.jpg"
-			alt="" />
-		<div class="container py-5">
-			
-		</div>
-	</div>
-<!-- Header End -->
 <body>
 
 </body>

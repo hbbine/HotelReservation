@@ -43,7 +43,15 @@
 
 <body>
 
-	<%@ include file="./inc/header.jsp" %>
+<%@ include file="./inc/header.jsp" %>
+	<!-- Header Start -->
+	<div>
+		<img class="img-fluid"
+			src="${pageContext.request.contextPath}/resources/img/lobby3.jpg"
+			alt="" />
+		<div class="container py-5"></div>
+	</div>
+	<!-- Header End -->
 
 	<div class="container">
     <div style=" display:flex; justify-content: center;">
@@ -59,9 +67,8 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            <div class="form-floating">
-                                <label for="m_id">Member ID</label>
-                                <form:input path="m_id" value="${m_id}" readonly = "true" style="width: 100%;"
+                            <div class="form-floating">                          
+                                <form:hidden path="m_id" value="${m_id}" readonly = "true" style="width: 100%;"
                                     required="true" data-error="ID is required." />
                             </div>
                         </div>

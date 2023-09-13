@@ -66,6 +66,10 @@ public class HomeController {
 	@GetMapping("/index")
 	public String requestIndexPage() {
 		
+		
+		
+		
+		
 		return"index";
 	}
 

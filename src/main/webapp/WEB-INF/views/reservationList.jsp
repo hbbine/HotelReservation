@@ -136,19 +136,16 @@ function nextCalendar(){
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!-- 로그인 유무에 따른 헤더 조건식 -->
-<c:choose>
-    <c:when test="${empty sessionScope.m_id}">
-        <%-- 세션 값이 존재하지 않는 경우 --%>
-        <%@ include file="./inc/header.jsp" %>
-    </c:when>
-    <c:otherwise>
-        <%-- 세션 값이 존재하지 하는 경우 --%>
-        <%@ include file="./inc/loginHeader.jsp" %>
-    </c:otherwise>
-</c:choose>      
 <body>
-
+<%@ include file="./inc/header.jsp" %>
+	<!-- Header Start -->
+	<div>
+		<img class="img-fluid"
+			src="${pageContext.request.contextPath}/resources/img/lobby3.jpg"
+			alt="" />
+		<div class="container py-5"></div>
+	</div>
+	<!-- Header End -->
 <table>
  <c:forEach items="${allReservationList}" var="reservation">
             <tr>

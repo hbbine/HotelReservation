@@ -20,16 +20,28 @@
 	background-color: #f0f0f0;
 	font-weight: bold;
 }
-
 /* 표의 데이터 셀에 스타일을 적용합니다. */
 .table-custom tbody td {
 	
+}
+
+.admin-row {
+    
+    color: red; 
 }
 </style>
 
 </head>
 <body>
-	<%@ include file="./inc/header.jsp"%>
+<%@ include file="./inc/header.jsp" %>
+	<!-- Header Start -->
+	<div>
+		<img class="img-fluid"
+			src="${pageContext.request.contextPath}/resources/img/lobby3.jpg"
+			alt="" />
+		<div class="container py-5"></div>
+	</div>
+	<!-- Header End -->
 
 	<div class="container">
 		<div style="display: flex; justify-content: center;">
@@ -49,7 +61,7 @@
 						<tbody>
 							<!-- 여기에 서버에서 가져온 데이터를 반복문으로 표시 -->
 							<c:forEach var="list" items="${boardList}">
-								<tr>
+								<tr class="${list.is_admin ? 'admin-row' : ''}">
 									<td>${list.b_id}</td>
 									<td><a href="${pageContext.request.contextPath}/boardOneview?b_id=${list.b_id}">${list.b_title}</a></td>
 									<td>${list.m_id}</td> <!-- 세션아이디 값넣기 -->

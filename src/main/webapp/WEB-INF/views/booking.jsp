@@ -29,25 +29,19 @@
     .form-floating {
         margin-bottom: 15px;
     }
-</style>
-
-<!-- 로그인 유무에 따른 헤더 조건식 -->
-<c:choose>
-    <c:when test="${empty sessionScope.m_id}">
-        <%-- 세션 값이 존재하지 않는 경우 --%>
-        <a href="${pageContext.request.contextPath}/login" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">
-    </c:when>
-    <c:otherwise>
-        <%-- 세션 값이 존재하지 하는 경우 --%>
-        <a href="${pageContext.request.contextPath}/booking" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">
-    </c:otherwise>
-</c:choose>      
+</style>  
 </head>
-
-
 <body>
 
-	<%@ include file="./inc/loginHeader.jsp" %>
+	<%@ include file="./inc/header.jsp" %>
+	<!-- Header Start -->
+	<div>
+		<img class="img-fluid"
+			src="${pageContext.request.contextPath}/resources/img/lobby3.jpg"
+			alt="" />
+		<div class="container py-5"></div>
+	</div>
+	<!-- Header End -->
 
 	<div class="container">
 		<div style=" display:flex; justify-content: center;">

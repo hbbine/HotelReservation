@@ -20,7 +20,7 @@ public interface BoardMapper {
 	public void insertBoard(BoardDTO dto);
 	
 	//boardList
-	@Select("SELECT * FROM board ORDER BY b_id DESC")
+	@Select("SELECT b_id, m_id, b_title, b_date, is_admin FROM board ORDER BY is_admin DESC, b_date desc, b_id DESC")
 	public List<BoardDTO> getAllBoardList();
 	
 	//one view
@@ -38,4 +38,10 @@ public interface BoardMapper {
 	//delete
 	@Delete("DELETE FROM board WHERE b_id=#{b_id}")
 	void deleteBoard(@Param("b_id") int b_id) throws DataAccessException;
+	
+	//update admin post
+	@Update("UPDATE board SET is_admin = 1 WHERE m_id = #{m_id}")
+	void updateAdminPost(@Param("m_id") String m_id);
+	
+	
 }

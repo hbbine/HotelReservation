@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +25,7 @@
 
     <!-- Template Stylesheet -->
     <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
-           
+
 </head>
 <body>
 
@@ -71,27 +72,29 @@
                       
                     </div>
                 </div>
-                
-                  <div class="nav-item dropdown">
-                    <a href="${pageContext.request.contextPath}/boardList" class="nav-item nav-link">Q & A</a>
-                </div>
-                <a href="${pageContext.request.contextPath}/login" class="nav-item nav-link">Login<i class="fa fa-arrow-right ms-3"></i></a>
-            </div>
-            <a href="${pageContext.request.contextPath}/join" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Join Now<i class="fa fa-arrow-right ms-3"></i></a>
-        </div>
-    </nav>
-    <!-- Navbar End -->
-    <!-- Header Start -->
-	<div>
-		<img class="img-fluid"
-			src="${pageContext.request.contextPath}/resources/img/lobby3.jpg"
-			alt="" />
-		<div class="container py-5">
-			
-		</div>
-	</div>
-<!-- Header End -->
-<body>
-
+                <div class="navbar-nav ms-auto p-4 p-lg-0">
+                 	<a href="${pageContext.request.contextPath}/boardList" class="nav-item nav-link">Q & A</a>
+                 	
+                <c:choose>
+    				<c:when test="${empty sessionScope.LoginDTO}">
+        				<a href="${pageContext.request.contextPath}/login" class="nav-item nav-link active">Login</a>
+        				<a href="${pageContext.request.contextPath}/join" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Join Now<i class="fa fa-arrow-right ms-3"></i></a>
+    				</c:when>
+    			<c:otherwise>
+        			<!-- 세션에서 아이디 추출 -->
+        			<c:set var="username" value="${sessionScope.LoginDTO.m_id}" />
+        			<div class="nav-item dropdown">
+        				<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+    						<span style="color: #06BBCC;">${username}&nbsp;</span>님 환영합니다!
+						</a>
+        				<div class="dropdown-menu fade-down m-0">
+            			<a href="${pageContext.request.contextPath}/myPage" class="dropdown-item">My Page</a>
+        				</div>
+        				</div>
+        				<a href="${pageContext.request.contextPath}/logout" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Logout<i class="fa fa-arrow-right ms-3"></i></a>
+    			</c:otherwise>
+				</c:choose>
+</div>
+</nav>
 </body>
 </html>
