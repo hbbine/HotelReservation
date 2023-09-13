@@ -21,5 +21,9 @@ public interface BoardService {
 	
 	//게시판 수정
 	public void updateBoard(BoardDTO dto) throws Exception;
+	
+	//게시판 삭제
+	void deleteBoard(int b_id);
+
 
 }

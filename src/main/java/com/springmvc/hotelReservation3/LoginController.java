@@ -37,7 +37,7 @@ public class LoginController {
 		  if(Login != null) { //로그인 성공
 			 session.setAttribute("LoginDTO", Login);
 			 String mID = Login.getM_id();
-			 System.out.println("m_id: " + mID); 
+			 System.out.println("로그인 m_id: " + mID); 
 			 model.addAttribute("m_id", mID); // 로그인 정보를 모델에 추가
 			 return "/loginConfirm"; 
 		  }else {

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -31,7 +31,15 @@
     border-color: #06BBCC !important; /* 테두리 선 (파란색) */
     color: #06BBCC !important;  /* 글자 색상 (파란색) */
 }
+ .id_input_ok{
+		color:green;
+		display: none;
+	}
 
+	.id_input_already{
+		color:red; 
+		display: none;
+	}
 </style>
 
 </head>
@@ -71,7 +79,7 @@
 							<a href="${pageContext.request.contextPath}/updateBoard?b_id=${board.b_id}"
 								class="btn btn-custom w-45"> 수정 </a>
 							<a href="${pageContext.request.contextPath}/deleteBoard?b_id=${board.b_id}"
-								class="btn btn-danger"> 삭제 </a>
+								class="btn btn-custom w-45"> 삭제 </a>	
 						</div>
 					</div>
 				</div>
@@ -79,5 +87,7 @@
     </div>
 </div>
 	<%@ include file="./inc/footer.jsp"%>
+
+	
 </body>
 </html>

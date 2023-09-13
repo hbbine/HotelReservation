@@ -60,8 +60,7 @@
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
-                                <label for="m_id">Member ID</label>
-                                <form:input path="m_id" value="${board.m_id}" readonly = "true" style="width: 100%;"
+                                <form:hidden path="m_id" value="${board.m_id}" readonly = "true" style="width: 100%;"
                                     required="true" data-error="ID is required." />
                             </div>
                         </div>
@@ -83,6 +82,12 @@
                                 <label for="b_content">Content</label>
                                 <form:textarea path="b_content"  value="${board.b_content}"
                                     style="width: 100%; height: 200px;" required="true" data-error="Content is required."></form:textarea>
+                            </div>
+                        </div>
+                         <div class="col-12">
+                            <div class="form-floating">
+                                <form:hidden path="b_date"  value="${board.b_date}"
+                                    style="width: 100%; height: 200px;" required="true" data-error="Content is required."></form:hidden>
                             </div>
                         </div>
                         <div class="col-12">

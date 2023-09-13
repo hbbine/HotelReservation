@@ -2,6 +2,7 @@ package com.springmvc.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -31,6 +32,10 @@ public interface BoardMapper {
 	public void updateViewCnt(@Param("b_id") int b_id, @Param("cnt") int cnt);
 
 	//update
-	@Update("UPDATE board SET b_title = #{b_title}, b_content = #{b_content} WHERE b_id = #{b_id}")
+	@Update("UPDATE board SET b_title = #{b_title}, b_content = #{b_content}, b_date = NOW() WHERE b_id = #{b_id}")
 	public void updateBoard(BoardDTO board);
+	
+	//delete
+	@Delete("DELETE FROM board WHERE b_id=#{b_id}")
+	void deleteBoard(@Param("b_id") int b_id) throws DataAccessException;
 }

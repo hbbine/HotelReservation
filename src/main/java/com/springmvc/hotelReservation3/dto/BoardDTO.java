@@ -14,7 +14,7 @@ public class BoardDTO {
 	) DEFAULT CHARSET=utf8mb4;
 	 */
 	
-	private String b_id;
+	private int b_id;
 	private String m_id;
 	private String m_password;
 	private String b_title;
@@ -26,11 +26,11 @@ public class BoardDTO {
 		super();
 	}
 
-	public String getB_id() {
+	public int getB_id() {
 		return b_id;
 	}
 
-	public void setB_id(String b_id) {
+	public void setB_id(int b_id) {
 		this.b_id = b_id;
 	}
 
@@ -82,6 +82,7 @@ public class BoardDTO {
 		this.b_viewcnt = b_viewcnt;
 	}
 
+	
 
 	
 	
