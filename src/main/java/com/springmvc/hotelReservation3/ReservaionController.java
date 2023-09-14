@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.springmvc.hotelReservaion3.service.ReservationService;
+import com.springmvc.hotelReservation3.dto.BoardDTO;
 import com.springmvc.hotelReservation3.dto.MemberDTO;
 import com.springmvc.hotelReservation3.dto.ReservationDTO;
 
@@ -92,7 +93,7 @@ public class ReservaionController {
 		int totalPrice = roomPrice * (int) diffDays;
 		reservationDTO.setR_price(totalPrice);
 
-		System.out.println(totalPrice);
+		System.out.println("reservation total price" +totalPrice);
 
 		// 결제승인
 		reservationDTO.setCONFIRMATION_PAYMENT(false);
@@ -104,7 +105,42 @@ public class ReservaionController {
 
 	}
 	
-
+/* -------------------------reservation Check----------------------------*/
 	
+	@RequestMapping(value = "/reservationCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public String reservationCheckPost(@RequestParam("r_type") String r_type, @RequestParam("r_checkin") String r_checkin, @RequestParam("r_checkout") String r_checkout) throws Exception{
+		
+		int result = service.reservationCheck(r_type, r_checkin, r_checkout);
+		System.out.println("reservation chk " + result);
+		if(result != 0) {
+			return "fail";
+		} else {
+			return "success";
+		}	
+	}
+	
+	@GetMapping("/reservationCheck")
+	public String requestAboutPage() {
+		
+		return"reservationCheck";
+	}
+	
+/* -------------------------Personal reservation List ----------------------------*/
 
+	@GetMapping("/myReservation")
+	public String getPersonalReservationList(HttpServletRequest request, Model model) {
+		
+	    // 지금 로그인된 세션 정보
+	    MemberDTO memberdto = (MemberDTO) request.getSession().getAttribute("LoginDTO");
+	    System.out.println("My Reservation <" + memberdto.getM_id() + "> check");
+
+	    if (memberdto != null && memberdto.getM_id() != null) {
+	        List<ReservationDTO> getPersonalReservationList = service.getPersonalReservaionList(memberdto.getM_id());
+	        model.addAttribute("myReservation", getPersonalReservationList);
+	    }
+
+	    return "/myReservation";
+	}
+	
 }

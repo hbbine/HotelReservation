@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.springmvc.hotelReservaion3.service.MemberService;
+import com.springmvc.hotelReservation3.dto.BoardDTO;
 import com.springmvc.hotelReservation3.dto.MemberDTO;
 import com.springmvc.hotelReservation3.dto.ReservationDTO;
 
@@ -58,6 +59,43 @@ public class MemberController {
 	    } else {
 	        return "success";
 	    }
+	}
+	
+/* -------------------------My information 수정----------------------------*/
+	
+	@GetMapping("/myInformation")
+	public String updateBoard(Model model, HttpServletRequest request ) { //requestParam을 이용해서 url에 있는 id 값을 받아줌
+		// 지금 로그인된 세션 정보
+	    MemberDTO memberdto = (MemberDTO) request.getSession().getAttribute("LoginDTO"); //get now session info for convey joinform
+		model.addAttribute("joinForm", memberdto ); //담은 memberdto를 joinForm 폼으로 보내주면 이전에 썼던 글이 생성되어있음
+		
+		return"myInformation";
+	}
+	
+	@RequestMapping(value = "/myInformation", method = RequestMethod.POST)
+	public String updateBoard(@ModelAttribute("joinForm") MemberDTO memberdto, Model model) throws Exception { 
+		
+		service.updateMyInformation(memberdto);
+		model.addAttribute("board",memberdto);
+		
+		String m_id = memberdto.getM_id();
+	
+	    return "/index";
+	}
+	
+/* -------------------------Delete member----------------------------*/
+
+	@GetMapping(value = "/deleteMember")
+	public String deleteMember(Model model, @RequestParam("m_id") String m_id, HttpServletRequest request) throws Exception{
+		
+		String alertScript = "alert('Are you seriously delete your info?');";
+        model.addAttribute("alertScript", alertScript);
+        
+	    service.deleteMember(m_id);
+		System.out.println("Delete member" + m_id);
+		
+		return "redirect:/index";
+		
 	}
 } 
 

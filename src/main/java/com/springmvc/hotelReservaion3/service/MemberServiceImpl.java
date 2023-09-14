@@ -33,6 +33,18 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.idCheck(memberId);
 	}
 
+	@Override
+	public void updateMyInformation(MemberDTO memberdto) throws Exception {
+		mapper.updateMyInformation(memberdto);
+		
+	}
+
+	@Override
+	public void deleteMember(String m_id) {
+		mapper.deleteMember(m_id);
+		
+	}
+
 
 
 }

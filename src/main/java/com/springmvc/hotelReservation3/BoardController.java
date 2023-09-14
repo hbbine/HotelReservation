@@ -35,16 +35,7 @@ public class BoardController {
 		model.addAttribute("boardForm", new BoardDTO());
 		MemberDTO memberdto = (MemberDTO) request.getSession().getAttribute("LoginDTO");
 		
-		String admin = null;
-	
 	    if (memberdto != null) {
-	    	
-	    	//관리자인경우 따로 표시해서 모델에 넘김
-	    	if(memberdto.getM_id().equals("admin")) {
-				admin = memberdto.getM_id();
-			}
-	    	model.addAttribute("admin", admin);
-	    	
 	        // 로그인된 상태이므로 글쓰기페이지를 표시
 	        model.addAttribute("m_id", memberdto.getM_id());
 	        model.addAttribute("m_password", memberdto.getM_password());
@@ -121,7 +112,7 @@ public class BoardController {
 	@RequestMapping(value = "/updateBoard", method = RequestMethod.POST)
 	public String updateBoard(@ModelAttribute("boardForm") BoardDTO boarddto, Model model) throws Exception { //updateBoardForm이라는 객채를 BoardDTO에 받음
 		
-		service.updateBoard(boarddto);
+		service.updateBoard(boarddto); //update function exercise
 		model.addAttribute("board",boarddto);
 		
 		int b_id = boarddto.getB_id();

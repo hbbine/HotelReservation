@@ -10,5 +10,9 @@ public interface ReservationService {
 	
 	public List <ReservationDTO> getAllReservation();
 	
+	//reservation check
+	public int reservationCheck(String r_type, String r_checkin, String r_checkout) throws Exception;
 	
+	//reservation personal List
+	public List<ReservationDTO> getPersonalReservaionList(String m_id);
 }

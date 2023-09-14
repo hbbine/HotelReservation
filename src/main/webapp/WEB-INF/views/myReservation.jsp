@@ -47,31 +47,34 @@
 		<div style="display: flex; justify-content: center;">
 			<div class="col-lg-4 col-md-12 wow fadeInUp">
 				<div class="boardListform">
-					<h2 class="block-title text-center">Q & A</h2>
+					<h4 class="block-title text-center"> &nbsp; &nbsp;${username}님의 예약 내역</h4>
 					<table class="table table-bordered table-custom">
 						<thead>
 							<tr>
-								<th>글 번호</th>
-								<th>제목</th>
-								<th>아이디</th>
-								<th>작성날짜</th>
-								<th>조회수</th>
+								<th>예약번호</th>
+								<th>id</th>
+								<th>checkin</th>
+								<th>checkout</th>
+								<th>room Type</th>
+								<th>adults</th>
+								<th>kids</th>
+								<th>price</th>
 							</tr>
 						</thead>
 						<tbody>
 							<!-- 여기에 서버에서 가져온 데이터를 반복문으로 표시 -->
-							<c:forEach var="list" items="${boardList}">
-								<tr class="${list.is_admin ? 'admin-row' : ''}">
-									<td>${list.b_id}</td>
-									<td><a href="${pageContext.request.contextPath}/boardOneview?b_id=${list.b_id}" style="color: ${list.is_admin ? 'red' : 'inherit'};">${list.b_title}</a></td>
-									<td>${list.m_id}</td> <!-- 세션아이디 값넣기 -->
-									<td>${list.b_date}</td>
-									<td>${list.b_viewcnt}</td>
+							<c:forEach var="reservation" items="${myReservation}">
+								<tr>
+									<td>${reservation.r_id}</td>
+									<td>${reservation.m_id}</td>
+									<td>${reservation.r_checkin}</td>
+									<td>${reservation.r_checkout}</td>
+									<td>${reservation.r_type}</td>
+									<td>${reservation.r_adults}</td>
+									<td>${reservation.r_kids}</td>
+									<td>${reservation.r_price}</td>
 								</tr>
 							</c:forEach>
-							<a href="${pageContext.request.contextPath}/writeBoard"
-								class="nav-item nav-link">Write<i
-								class="fa fa-arrow-right ms-3"></i></a>
 						</tbody>
 					</table>
 				</div>

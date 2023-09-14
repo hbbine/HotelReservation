@@ -88,7 +88,9 @@
     						<span style="color: #06BBCC;">${username}&nbsp;</span>님 환영합니다!
 						</a>
         				<div class="dropdown-menu fade-down m-0">
-            			<a href="${pageContext.request.contextPath}/myPage" class="dropdown-item">My Page</a>
+            			<a href="${pageContext.request.contextPath}/myReservation?m_id=${username}" class="dropdown-item">내 예약내역</a>
+            			
+            			<a href="${pageContext.request.contextPath}/myInformation" class="dropdown-item">회원 정보 수정</a>
         				</div>
         				</div>
         				<a href="${pageContext.request.contextPath}/logout" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Logout<i class="fa fa-arrow-right ms-3"></i></a>

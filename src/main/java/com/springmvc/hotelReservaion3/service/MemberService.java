@@ -1,5 +1,6 @@
 package com.springmvc.hotelReservaion3.service;
 
+import com.springmvc.hotelReservation3.dto.BoardDTO;
 import com.springmvc.hotelReservation3.dto.MemberDTO;
 
 public interface MemberService {
@@ -13,5 +14,9 @@ public interface MemberService {
 	//아이디 중복체크
 	public int idCheck(String memberId) throws Exception;
 	
+	//my information 수정
+	public void updateMyInformation(MemberDTO memberdto) throws Exception;
 	
+	//delete member
+	void deleteMember(String m_id);
 }

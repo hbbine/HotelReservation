@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-<!-- 달력 오픈소스 datepicker 끝 -->
+
 
 <style>
     .reservation-form {
@@ -119,6 +119,9 @@
 										<form:option value="3">Standard</form:option>
 									</form:select>		
 								</div>
+								<!-- ajax 중복체크 -->
+								<span class="id_input_ok">reservation okay.</span> 
+								<span class="id_input_already">reservation deny</span>
 							</div>
 							
 							<div class="col-12">
@@ -170,7 +173,9 @@
 		</div>
 	</div>
 	
-	<!-- Footer Start -->
+	
+	
+	 <!-- Footer Start 
     <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
             <div class="row g-5">
@@ -222,7 +227,7 @@
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                         &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved.
 
-                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                        /*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/
                         Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a><br><br>
                         Distributed By <a class="border-bottom" href="https://themewagon.com">ThemeWagon</a>
                     </div>
@@ -238,7 +243,41 @@
             </div>
         </div>
     </div>
-    <!-- Footer End -->
+    
+    
+    Footer End -->
+    
+    <script>
+    // 예약 중복 확인
+    $('form input[name="r_type"], form input[name="r_checkin"], form input[name="r_checkout"]').on("propertychange change keyup paste input", function() {
+        var r_type = $('form input[name="r_type"]').val();
+        var r_checkin = $('form input[name="r_checkin"]').val();
+        var r_checkout = $('form input[name="r_checkout"]').val();
+        
+        var data = {
+            r_type: r_type,
+            r_checkin: r_checkin,
+            r_checkout: r_checkout
+        };
+
+        $.ajax({
+            type: "post",
+            url: "/hotelReservaion3/reservationCheck",
+            data: data,
+            success: function(result) {
+                if (result != 'fail') {
+                    $('.id_input_ok').css("display", "inline-block");
+                    $('.id_input_already').css("display", "none");
+                    $('#submit').prop('disabled', false); // 중복이 아니면 제출 버튼 활성화
+                } else {
+                    $('.id_input_already').css("display", "inline-block");
+                    $('.id_input_ok').css("display", "none");
+                    $('#submit').prop('disabled', true); // 중복이면 제출 버튼 비활성화
+                }
+            }
+        });
+    });
+</script>
     <!-- JavaScript Libraries -->
  	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
