@@ -11,13 +11,5 @@
     #{reservationInsert.r_type}, #{reservationInsert.r_adults}, #{reservationInsert.r_kids},
     #{reservationInsert.r_price}, #{reservationInsert.CONFIRMATION_PAYMENT})
     ]]>
-	</insert>
-	
-	<!-- Read -->
-	<select id="getAllReservation" parameterType="com.springmvc.hotelReservation3.dto.ReservationDTO"
-        	resultType="com.springmvc.hotelReservation3.dto.ReservationDTO">
-    <![CDATA[
-    select * from reservation order by r_checkin ASC, r_type ASC
-    ]]>
-	</select> 		
+	</insert>	
 </mapper>

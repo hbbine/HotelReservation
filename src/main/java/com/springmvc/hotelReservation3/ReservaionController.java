@@ -1,12 +1,14 @@
 package com.springmvc.hotelReservation3;
 
-import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,11 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.springmvc.hotelReservaion3.service.ReservationService;
-import com.springmvc.hotelReservation3.dto.BoardDTO;
 import com.springmvc.hotelReservation3.dto.MemberDTO;
 import com.springmvc.hotelReservation3.dto.ReservationDTO;
 
@@ -28,18 +26,19 @@ public class ReservaionController {
 
 	@Autowired
 	ReservationService service;
-	private String userID;
-	
-	//예약 목록
-	@GetMapping("/reservationList")
-	public String reservation(Model model) {
-		List<ReservationDTO> allReservaionList = service.getAllReservation();
-		model.addAttribute("allReservaionList", allReservaionList);
-				
-		return "/reservationList";
+
+/* -------------------------예약 목록----------------------------*/
+	@GetMapping("/ReservationList")
+	public String showD01(Model model) {
+		
+		
+		
+		
+		
+		return "reservationList";
 	}
 
-	//예약하기
+/* -------------------------예약하기----------------------------*/
 	@GetMapping("/booking")
 	public String doReservation(Model model, ReservationDTO reservationDTO, HttpServletRequest request) {
 		model.addAttribute("reservationForm", new ReservationDTO());
@@ -55,19 +54,11 @@ public class ReservaionController {
 	        // 로그인되지 않은 상태이므로 로그인 페이지로 이동
 	        return "redirect:/login";
 	    }
-		
-		
-//		model.addAttribute("m_id", memberdto.getM_id());
-//		System.out.println("세션 값 확인 : " + memberdto.getM_id());
-//		reservationDTO.setM_id((String) session.getAttribute("m_id"));
 	}
 	
 	@RequestMapping(value = "/booking", method = RequestMethod.POST)
 	public String reservation(@ModelAttribute("reservationForm") ReservationDTO reservationDTO, HttpSession session,
 		Model model) throws Exception {
-
-		//reservationDTO.setM_id((String) session.getAttribute("m_id"));
-		
 
 		// 체크인 체크아웃 날짜간 차이를 구한다
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); // 내가 원하는 날짜 형식을 지정 (포맷)
@@ -84,7 +75,6 @@ public class ReservaionController {
 		System.out.println("숙박기간" +diffDays);
 
 		String roomtype = reservationDTO.getR_type();
-
 		System.out.println("roomtype" + roomtype);
 
 		int roomPrice = 0;
@@ -100,8 +90,6 @@ public class ReservaionController {
 
 		System.out.println("reservation total price" +totalPrice);
 
-		
-		
 		//예약 중복 체크
 		System.out.println("예약중복체크 함수 들어옴");
 		int result = service.reservationCheck(roomtype, formattedBeginDate, formattedEndDate);
@@ -133,6 +121,5 @@ public class ReservaionController {
 	    }
 
 	    return "/myReservation";
-	}
-	
+	}	  
 }

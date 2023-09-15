@@ -1,5 +1,6 @@
 package com.springmvc.hotelReservaion3.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public List<ReservationDTO> getAllReservation() {
-		return repository.getAllReservation();
+		return mapper.getAllReservation();
 		
 	}
 	@Override
