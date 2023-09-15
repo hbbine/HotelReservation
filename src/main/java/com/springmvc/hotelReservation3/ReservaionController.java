@@ -64,7 +64,7 @@ public class ReservaionController {
 	
 	@RequestMapping(value = "/booking", method = RequestMethod.POST)
 	public String reservation(@ModelAttribute("reservationForm") ReservationDTO reservationDTO, HttpSession session,
-		Model model) throws ParseException {
+		Model model) throws Exception {
 
 		//reservationDTO.setM_id((String) session.getAttribute("m_id"));
 		
@@ -75,12 +75,17 @@ public class ReservaionController {
 		Date endDate = formatter.parse(reservationDTO.getR_checkout()); // 체크아웃
 		long diff = endDate.getTime() - beginDate.getTime(); // 체크아웃 - 체크인 시간차이 
 		long diffDays = diff / (24 * 60 * 60 * 1000);// 날짜 계산 하루예약은 0이므로 +1해준다.
+		
+		// 날짜를 문자열로 변환 (Date 형식을 String으로 받기위해 변수 설정함)
+		String formattedBeginDate = formatter.format(beginDate);
+		String formattedEndDate = formatter.format(endDate);
 
-		System.out.println(diffDays);
+		System.out.println("----Booking----");
+		System.out.println("숙박기간" +diffDays);
 
 		String roomtype = reservationDTO.getR_type();
 
-		System.out.println(roomtype);
+		System.out.println("roomtype" + roomtype);
 
 		int roomPrice = 0;
 		if (roomtype.equals("1")) {
@@ -95,37 +100,24 @@ public class ReservaionController {
 
 		System.out.println("reservation total price" +totalPrice);
 
-		// 결제승인
-		reservationDTO.setCONFIRMATION_PAYMENT(false);
-
-		//reservationDTO.setM_id(m_id);
-		service.reservationInsert(reservationDTO);
-		model.addAttribute("dto", reservationDTO);
-		return "redirect:/reservationList";
-
-	}
-	
-/* -------------------------reservation Check----------------------------*/
-	
-	@RequestMapping(value = "/reservationCheck", method = RequestMethod.POST)
-	@ResponseBody
-	public String reservationCheckPost(@RequestParam("r_type") String r_type, @RequestParam("r_checkin") String r_checkin, @RequestParam("r_checkout") String r_checkout) throws Exception{
 		
-		int result = service.reservationCheck(r_type, r_checkin, r_checkout);
-		System.out.println("reservation chk " + result);
+		
+		//예약 중복 체크
+		System.out.println("예약중복체크 함수 들어옴");
+		int result = service.reservationCheck(roomtype, formattedBeginDate, formattedEndDate);
+		System.out.println("방타입 : " + roomtype + " 체크인 : " + formattedBeginDate + " 체크아웃 : " + formattedEndDate);
+		System.out.println("중복결과 : "+ result);
 		if(result != 0) {
-			return "fail";
-		} else {
-			return "success";
-		}	
+			String alertScript = "중복예약입니다";
+	        model.addAttribute("alertScript", alertScript);
+	        return "redirect:/booking";  
+		}else {
+			service.reservationInsert(reservationDTO);
+			model.addAttribute("dto", reservationDTO);
+			return "redirect:/reservationList";
+		}
 	}
-	
-	@GetMapping("/reservationCheck")
-	public String requestAboutPage() {
-		
-		return"reservationCheck";
-	}
-	
+
 /* -------------------------Personal reservation List ----------------------------*/
 
 	@GetMapping("/myReservation")

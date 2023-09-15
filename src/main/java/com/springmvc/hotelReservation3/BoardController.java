@@ -58,7 +58,9 @@ public class BoardController {
 		//현재 로그인 정보를 MemberDTO에 담아서 가져옴
 		MemberDTO memberdto = (MemberDTO) session.getAttribute("LoginDTO");
 	    String m_id = memberdto.getM_id();
-		
+	    
+	    
+	    service.insertBoard(boarddto);
 		//만약 관리자 아이디라면 post에 권한 추가
 		if(m_id.equals("admin")) { 
 			service.updateAdminPost(m_id);
@@ -66,8 +68,6 @@ public class BoardController {
 		
 		// 게시물 작성자 설정
 	    boarddto.setM_id(m_id);
-	    
-		service.insertBoard(boarddto);
 		model.addAttribute("dto", boarddto);
 		
 		return "redirect:/boardList";	
@@ -89,10 +89,10 @@ public class BoardController {
 		
 		//게시글 정보 가져오기
 		BoardDTO boarddto = service.boardoneView(b_id); //게시판 테이블에서 글번호가져와서 model에 넣고 jsp화면으로 보내기
-		b_id = boarddto.getB_id();
+//		b_id = boarddto.getB_id();
 		
 		//게시글 조회수
-		int cnt  = boarddto.getB_viewcnt()+1;
+		int cnt = boarddto.getB_viewcnt()+1;
 		service.updateViewCnt(b_id, cnt); //조회수 함수 불러오기
 		
 		model.addAttribute("board", boarddto);
@@ -103,20 +103,41 @@ public class BoardController {
 /* -------------------------원글 수정----------------------------*/
 	
 	@GetMapping("/updateBoard")
-	public String updateBoard(Model model, @RequestParam("b_id") int b_id ) { //requestParam을 이용해서 url에 있는 id 값을 받아줌
-		BoardDTO boarddto = service.boardoneView(b_id); //param으로 받은 id값을 이용해서 원글보기할때 썼던 함수를 실행하여 boarddto에 담아줌
-		model.addAttribute("boardForm", boarddto ); //담은 boarddto를 boardForm 폼으로 보내주면 이전에 썼던 글이 생성되어있음
-		return"updateBoard";
+	public String updateBoard(Model model, @RequestParam("b_id") int b_id, HttpServletRequest request) { //requestParam을 이용해서 url에 있는 id 값을 받아줌
+		// 현재 로그인된 세션 정보
+	    MemberDTO memberdto = (MemberDTO) request.getSession().getAttribute("LoginDTO");
+	    
+	    //b_id를 통해 글쓴사람 id를 알아냄
+	    BoardDTO boarddto = service.boardoneView(b_id); //param으로 받은 id값을 이용해서 원글보기할때 썼던 함수를 실행하여 boarddto에 담아줌
+	   
+	    // 비회원인경우
+	    if(memberdto == null) {
+	    	 String alertScript = "alert('로그인 후에 수정 할 수 있습니다.');";
+	         model.addAttribute("alertScript", alertScript);
+	         return "redirect:/boardOneview?b_id=" + b_id;
+	    }
+	    
+	    // 현재 사용자의 ID와 게시물 작성자의 ID 또는 'admin'을 비교하여 권한 확인
+	    if (boarddto.getM_id().equals(memberdto.getM_id()) || memberdto.getM_id().equals("admin")) {
+			model.addAttribute("boardForm", boarddto ); //담은 boarddto를 boardForm 폼으로 보내주면 이전에 썼던 글이 생성되어있음
+			return"updateBoard";
+	    } else {
+	        String alertScript = "alert('수정 권한이 없습니다.');";
+	        model.addAttribute("alertScript", alertScript);
+
+	        System.out.println("글쓴이(" + boarddto.getM_id() + ")와 로그인 ID(" + memberdto.getM_id() + ")가 달라서 수정 불가능");
+	        return "redirect:/boardOneview?b_id=" + b_id;
+	    }
 	}
 	
 	@RequestMapping(value = "/updateBoard", method = RequestMethod.POST)
-	public String updateBoard(@ModelAttribute("boardForm") BoardDTO boarddto, Model model) throws Exception { //updateBoardForm이라는 객채를 BoardDTO에 받음
-		
-		service.updateBoard(boarddto); //update function exercise
-		model.addAttribute("board",boarddto);
-		
-		int b_id = boarddto.getB_id();
-	
+	public String updateBoard(@ModelAttribute("boardForm") BoardDTO boarddto, Model model) throws Exception {
+	    
+	    int b_id = boarddto.getB_id();
+	    service.updateBoard(boarddto); // 게시물 수정 함수 호출
+	    model.addAttribute("board", boarddto);
+	    
+
 	    return "redirect:/boardOneview?b_id=" + b_id;
 	}
 	

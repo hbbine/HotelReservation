@@ -99,7 +99,7 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            <button class="btn btn-primary w-100 py-3" type="submit" value="submit" id="submit">
+                            <button class="btn btn-primary w-100 py-3"  type="submit" value="submit" id="submit">
                                 수정 완료</button>
                         </div>
                     </form:form>
@@ -109,6 +109,6 @@
     </div>
 </div>
 	<%@ include file="./inc/footer.jsp" %>
-	
+
 </body>
 </html>

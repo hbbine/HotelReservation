@@ -10,7 +10,7 @@ import com.springmvc.mapper.BoardMapper;
 
 @Service
 public class BoardServiceImpl implements BoardService {
-
+	
 	@Autowired
 	private BoardMapper mapper;
 

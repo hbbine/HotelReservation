@@ -72,7 +72,7 @@ public class MemberController {
 		return"myInformation";
 	}
 	
-	@RequestMapping(value = "/myInformation", method = RequestMethod.POST)
+	@RequestMapping(value = "/myInformation", method = RequestMethod.POST)//수정 완료후 저장ㄴ
 	public String updateBoard(@ModelAttribute("joinForm") MemberDTO memberdto, Model model) throws Exception { 
 		
 		service.updateMyInformation(memberdto);
@@ -86,17 +86,26 @@ public class MemberController {
 /* -------------------------Delete member----------------------------*/
 
 	@GetMapping(value = "/deleteMember")
-	public String deleteMember(Model model, @RequestParam("m_id") String m_id, HttpServletRequest request) throws Exception{
+	public String deleteMember(Model model, @RequestParam("m_id") String m_id, HttpServletRequest request) throws Exception {
+
+	    System.out.println("멤버 삭제 전 alertScript 실행 ID = " + m_id);
+
+	    return "redirect:/deleteConfirm?m_id=" + m_id; //여기서 confirm으로 m_id랑 같이 보내줘야 confirm이 작동했음
+	}
+	
+	@GetMapping(value = "/deleteConfirm")
+	public String deleteConfirm(@RequestParam("m_id") String m_id, HttpSession session) throws Exception{
 		
-		String alertScript = "alert('Are you seriously delete your info?');";
-        model.addAttribute("alertScript", alertScript);
-        
-	    service.deleteMember(m_id);
-		System.out.println("Delete member" + m_id);
+		service.deleteMember(m_id);
+		session.invalidate();
+		System.out.println("멤버 삭제" + m_id + "님");
 		
 		return "redirect:/index";
 		
 	}
+	
+	
+	
 } 
 
 	  

@@ -20,7 +20,7 @@ public interface BoardMapper {
 	public void insertBoard(BoardDTO dto);
 	
 	//boardList
-	@Select("SELECT b_id, m_id, b_title, b_date, is_admin FROM board ORDER BY is_admin DESC, b_date desc, b_id DESC")
+	@Select("SELECT b_id, m_id, b_title, b_date, b_viewcnt, is_admin FROM board ORDER BY is_admin DESC, b_date desc")
 	public List<BoardDTO> getAllBoardList();
 	
 	//one view

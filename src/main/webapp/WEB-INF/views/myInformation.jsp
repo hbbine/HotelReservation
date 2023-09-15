@@ -48,7 +48,7 @@
 			<div class="col-lg-4 col-md-12 wow fadeInUp">
 				<div class="reservation-form">
 						<div class="row g-3">
-						<h2 class="block-title text-center">Join</h2>
+						<h2 class="block-title text-center">회원정보 수정</h2>
 						<form:form modelAttribute="joinForm" method="post" class="reservations-box" >
 							<div class="col-12 ">
 								<div class="form-floating">
@@ -89,17 +89,33 @@
 							</div>
 							<div class="col-12">
 								<button class="btn btn-primary w-100 py-3" type="submit" value="submit" id="submit">
-									Update Confirm</button>
+									수정 완료</button>
 							</div>
 							</form:form>
 						</div>
-
+						<div class="d-flex gap-3">
+						<a href="${pageContext.request.contextPath}/deleteMember?m_id=${username}" onclick="deleteMember('${board.m_id}')"
+   						class="btn btn-custom w-45"> 회원 탈퇴 </a> <!--  함수 호출방법 onclick="deleteMember('${board.m_id}')" -->
+						</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	
 	<%@ include file="./inc/footer.jsp" %>
+<script>
 
+function deleteMember(m_id) {
+    var alertScript   = confirm('Are you sure you want to delete your info?');
+
+    if (alertScript) {
+        // m_id를 URL 파라미터로 포함하여 deleteConfirm 페이지로 이동
+        var deleteURL = '${pageContext.request.contextPath}/deleteConfirm?m_id=' + m_id;
+        window.location.href = deleteURL;
+    } else {
+        // 사용자가 '취소'를 클릭한 경우, 아무 작업도 수행하지 않음
+    }
+}
+</script>
 </body>
 </html>

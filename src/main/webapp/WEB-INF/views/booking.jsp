@@ -52,7 +52,7 @@
 						<form:form modelAttribute="reservationForm" method="post" class="reservations-box" >
 							<div class="col-12 ">
 								<div class="form-floating">
-									<form:hidden path="r_id" placeholder="reservationID" style="width: 100%;"
+									<form:hidden path="r_id" placeholder="reservationID" style="width: 100%;" value="${ r_id }" 
 										required="true" data-error="ID is required." />
 								</div>
 							</div>
@@ -69,7 +69,7 @@
 							<div class="col-12">
 								<div class="form-floating">
 									<label for=r_checkin>Check In</label>
-									<form:input id ="r_checkin"  path="r_checkin" placeholder="check In" type="text" style="width: 100%;"
+									<form:input id ="r_checkin" value="${ r_checkin }"   path="r_checkin" placeholder="check In" type="text" style="width: 100%;"
 										required="true" data-error="Checkin is required" pattern="\d{4}-\d{2}-\d{2}"
 										title="Please enter a date in the format YYYY-mm-dd." />
 									<script>
@@ -91,7 +91,7 @@
 							<div class="col-12">
 								<div class="form-floating">
 									<label for="r_checkout">Check Out</label>
-									<form:input id="r_checkout" path="r_checkout" placeholder="check Out" type="text" style="width: 100%;"
+									<form:input id="r_checkout" value="${ r_checkout }"  path="r_checkout" placeholder="check Out" type="text" style="width: 100%;"
 									required="true" data-error="Checkout is required." pattern="\d{4}-\d{2}-\d{2}"
 									title="Please enter a date in the format YYYY-mm-dd." />
 									<script>
@@ -113,21 +113,18 @@
 							<div class="col-12">
 								<div class="form-floating">
 									<label for="r_type">Room Type</label>
-									<form:select path="r_type" class="r_type" required="true" style="width: 100%;" >
+									<form:select path="r_type"  value="${ r_type }"  class="r_type" required="true" style="width: 100%;" >
 										<form:option value="1">RoyalSweet</form:option>
 										<form:option value="2">Deluxe</form:option>
 										<form:option value="3">Standard</form:option>
-									</form:select>		
+									</form:select>	
 								</div>
-								<!-- ajax 중복체크 -->
-								<span class="id_input_ok">reservation okay.</span> 
-								<span class="id_input_already">reservation deny</span>
 							</div>
 							
 							<div class="col-12">
 								<div class="form-floating">
 									<label for="r_adults">Adults</label>
-										<form:select path="r_adults" class="r_adults" style="width: 100%;" required="true">
+										<form:select path="r_adults" value="${ r_adults }"  class="r_adults" style="width: 100%;" required="true">
 											<form:option value="1">1</form:option>
 											<form:option value="2">2</form:option>
 											<form:option value="3">3</form:option>
@@ -138,7 +135,7 @@
 							<div class="col-12">
 								<div class="form-floating">
 									<label for="r_kids">Kids</label>
-									<form:select path="r_kids" class="r_kids" style="width: 100%;"
+									<form:select path="r_kids" value="${ r_kids }"  class="r_kids" style="width: 100%;"
 											required="true">
 											<form:option value="1">1</form:option>
 											<form:option value="2">2</form:option>
@@ -149,7 +146,7 @@
 							
 							<div class="col-12">
 								<div class="form-floating">
-									<form:hidden path="r_price" placeholder="r_price"
+									<form:hidden path="r_price" value="${ r_price }" placeholder="r_price"
 										required="true" data-error="ID is required." />
 								</div>
 							</div>
@@ -172,111 +169,20 @@
 			</div>
 		</div>
 	</div>
-	
-	
-	
-	 <!-- Footer Start 
-    <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container py-5">
-            <div class="row g-5">
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-3">Quick Link</h4>
-                    <a class="btn btn-link" href="">About Us</a>
-                    <a class="btn btn-link" href="">Contact Us</a>
-                    <a class="btn btn-link" href="">Privacy Policy</a>
-                    <a class="btn btn-link" href="">Terms & Condition</a>
-                    <a class="btn btn-link" href="">FAQs & Help</a>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-3">Contact</h4>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
-                    <div class="d-flex pt-2">
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-3">Gallery</h4>
-                    <div class="row g-2 pt-2">
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="/hotelReservaion3/resources/img/hotel1.jpg" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="/hotelReservaion3/resources/img/hotel2.jpg" alt="">
-                        </div>
-                      
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h4 class="text-white mb-3">Newsletter</h4>
-                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-                    <div class="position-relative mx-auto" style="max-width: 400px;">
-                        <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="copyright">
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved.
+    
+<script>
+$(document).ready(function() {
+    // 경고 창 표시 함수
+    function showAlert(message) {
+        alert(message);
+    }
 
-                        /*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/
-                        Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a><br><br>
-                        Distributed By <a class="border-bottom" href="https://themewagon.com">ThemeWagon</a>
-                    </div>
-                    <div class="col-md-6 text-center text-md-end">
-                        <div class="footer-menu">
-                            <a href="">Home</a>
-                            <a href="">Cookies</a>
-                            <a href="">Help</a>
-                            <a href="">FQAs</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    
-    Footer End -->
-    
-    <script>
-    // 예약 중복 확인
-    $('form input[name="r_type"], form input[name="r_checkin"], form input[name="r_checkout"]').on("propertychange change keyup paste input", function() {
-        var r_type = $('form input[name="r_type"]').val();
-        var r_checkin = $('form input[name="r_checkin"]').val();
-        var r_checkout = $('form input[name="r_checkout"]').val();
-        
-        var data = {
-            r_type: r_type,
-            r_checkin: r_checkin,
-            r_checkout: r_checkout
-        };
-
-        $.ajax({
-            type: "post",
-            url: "/hotelReservaion3/reservationCheck",
-            data: data,
-            success: function(result) {
-                if (result != 'fail') {
-                    $('.id_input_ok').css("display", "inline-block");
-                    $('.id_input_already').css("display", "none");
-                    $('#submit').prop('disabled', false); // 중복이 아니면 제출 버튼 활성화
-                } else {
-                    $('.id_input_already').css("display", "inline-block");
-                    $('.id_input_ok').css("display", "none");
-                    $('#submit').prop('disabled', true); // 중복이면 제출 버튼 비활성화
-                }
-            }
-        });
-    });
+    // 경고 스크립트가 설정되어 있는 경우 실행
+    var alertScript = "${param.alertScript}";
+    if (alertScript && alertScript.trim() !== "") {
+        showAlert(alertScript);
+    }
+});
 </script>
     <!-- JavaScript Libraries -->
  	

@@ -84,7 +84,7 @@
 						<a href="${pageContext.request.contextPath}/boardList"
 							class="btn btn-primary w-45"> 목록 </a>
 						<div class="d-flex gap-3">
-							<a href="${pageContext.request.contextPath}/updateBoard?b_id=${board.b_id}"
+							<a href="${pageContext.request.contextPath}/updateBoard?b_id=${board.b_id}" onclick="updateBoard'${board.m_id}')"
 								class="btn btn-custom w-45"> 수정 </a>
 							<a href="${pageContext.request.contextPath}/deleteBoard?b_id=${board.b_id}"
 								class="btn btn-custom w-45"> 삭제 </a>	
@@ -106,6 +106,15 @@ $(document).ready(function() {
         eval(alertScript);
     }
 });
+</script>
+
+<script>
+function updateBoard(m_id) {
+	var alertScript = "${param.alertScript}";
+	if (alertScript && alertScript.trim() !== "") {
+		eval(alertScript);
+	}
+}
 </script>
 	
 </body>

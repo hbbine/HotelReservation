@@ -1,5 +1,6 @@
 package com.springmvc.hotelReservaion3.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,18 +30,18 @@ public class ReservationServiceImpl implements ReservationService {
 		return repository.getAllReservation();
 		
 	}
-
-	@Override
-	public int reservationCheck(String r_type, String r_checkin, String r_checkout) throws Exception {
-		return mapper.reservationCheck(r_type, r_checkin, r_checkout);
-		
-	}
-
 	@Override
 	public List<ReservationDTO> getPersonalReservaionList(String m_id) {
 		
 		return mapper.getPersonalReservaionList(m_id);
 	}
+
+	@Override
+	public int reservationCheck(String r_type, String formattedBeginDate, String formattedEndDate) throws Exception {
+		
+		return mapper.reservationCheck(r_type, formattedBeginDate, formattedEndDate);
+	}
+
 
 	
 
