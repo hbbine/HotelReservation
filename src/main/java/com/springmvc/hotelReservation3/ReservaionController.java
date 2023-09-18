@@ -40,17 +40,16 @@ public class ReservaionController {
 
 /* -------------------------예약하기----------------------------*/
 	@GetMapping("/booking")
-	public String doReservation(Model model, ReservationDTO reservationDTO, HttpServletRequest request) {
-		model.addAttribute("reservationForm", new ReservationDTO());
-		MemberDTO memberdto = (MemberDTO) request.getSession().getAttribute("LoginDTO");
-		
-	    if (memberdto != null) {
+	public String doReservation(Model model, HttpServletRequest request) {
+	    MemberDTO memberdto = (MemberDTO) request.getSession().getAttribute("LoginDTO");
+
+	    if (memberdto != null && memberdto.getM_id() != null) {
 	        // 로그인된 상태이므로 예약 페이지를 표시
 	        model.addAttribute("m_id", memberdto.getM_id());
-	        System.out.println("세션 값 확인: " + memberdto.getM_id());
+	        model.addAttribute("reservationForm", new ReservationDTO()); // reservationForm 객체를 모델에 추가
+	        System.out.println("예약 전 세션 값 확인: " + memberdto.getM_id());
 	        return "booking";
 	    } else {
-	    	
 	        // 로그인되지 않은 상태이므로 로그인 페이지로 이동
 	        return "redirect:/login";
 	    }
@@ -122,4 +121,20 @@ public class ReservaionController {
 
 	    return "/myReservation";
 	}	  
+	
+/* -------------------------예약상황에서 예약하기로 넘어가는 메서드----------------------------*/
+	
+	@GetMapping("/bookingCheck")
+	public String bookingCheck(Model model, HttpServletRequest request) {
+		
+		 //지금 로그인된 세션 정보
+	    MemberDTO memberdto = (MemberDTO) request.getSession().getAttribute("LoginDTO");
+	    
+	    if (memberdto == null || memberdto.getM_id() == null) {
+	        return "redirect:/login";
+	    } else {
+	    	System.out.println("예약상황에서 예약하기로 넘어가기 <" + memberdto.getM_id() + "> check");
+	    	return "redirect:/booking";
+	    }	
+	}
 }

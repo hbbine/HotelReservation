@@ -56,37 +56,44 @@ public class StatusController {
 		//날짜 초기화
 		cal = Calendar.getInstance();
 		
-		/*
-		 * //비교위해서 다시 처음부터 반복함 for(int i = 0; i < 30; i++) {
-		 * 
-		 * int resultR = Rservice.reservationCheck("1",
-		 * statusList.get(i).getS_checkin(), statusList.get(i).getS_checkout());
-		 * 
-		 * if(resultR != 0) { statusList.get(i).setS_royalSweet("예약불가능"); }else {
-		 * statusList.get(i).setS_royalSweet("예약가능"); }
-		 * 
-		 * int resultD = Rservice.reservationCheck("2",
-		 * statusList.get(i).getS_checkin(), statusList.get(i).getS_checkout());
-		 * 
-		 * if(resultD != 0) { statusList.get(i).setS_deluxe("예약불가능"); }else {
-		 * statusList.get(i).setS_deluxe("예약가능"); }
-		 * 
-		 * int resultS = Rservice.reservationCheck("3",
-		 * statusList.get(i).getS_checkin(), statusList.get(i).getS_checkout());
-		 * 
-		 * if(resultS != 0) { statusList.get(i).setS_standard("예약불가능"); }else {
-		 * statusList.get(i).setS_standard("예약가능"); }
-		 * 
-		 * System.out.println("전체예약상황 royal : " + resultR);
-		 * System.out.println("전체예약상황 deluxe : " + resultD);
-		 * System.out.println("전체예약상황 standard : " + resultS); }
-		 */
+		
+		
+		for (StatusDTO status : statusList) {
+			System.out.println("statusList 반복문 진입");
+		    for (ReservationDTO reservation : reservationList) {
+		    	System.out.println("reservation 반복문 진입");
+		    	System.out.println("status 체크인 날짜 " +status.getS_checkin());
+	        	System.out.println("예약테이블 체크인 날짜 " + reservation.getR_checkin());
+		    	
+		        if (status.getS_checkin().equals(reservation.getR_checkin())) {
+		        	
+		        	if ("1".equals(reservation.getR_id())) {
+		        		
+		        	    System.out.println("예약방번호 1 = " + reservation.getR_id());
+		        	    status.setS_royalSweet("예약불가능");
+		        	    
+		        	} else if ("2".equals(reservation.getR_id())) {
+		        		
+		        	    System.out.println("예약방번호 2 = " + reservation.getR_id());
+		        	    status.setS_deluxe("예약불가능");
+		        	    
+		        	} else {
+		        		
+		        	    System.out.println("예약방번호 3 = " + reservation.getR_id());
+		        	    status.setS_standard("예약불가능");
+		        	}
+		            break; // 일치하는 예약을 찾았으므로 루프 종료
+		        }
+		    }
+		}
+
 	    // 모델에 statusList를 추가하여 뷰에서 사용할 수 있도록 함
 	    model.addAttribute("statusList", statusList);
 
 	    // 반환할 뷰 이름 리턴
 	    return "reservationList";
 	}
+	
 	
 	
 }
