@@ -30,7 +30,7 @@ public class StatusController {
 	public String insertStatus(Model model, StatusDTO statusdto) throws Exception {
 		
 		// StatusDTO 객체들을 담을 리스트 생성
-		List<StatusDTO> statusList = new ArrayList<>(); 
+		List<StatusDTO> statusList = new ArrayList<StatusDTO>(); 
 		
 		//DB에 저장된 예약
 		List<ReservationDTO> reservationList = Rservice.getAllReservation();
@@ -56,36 +56,27 @@ public class StatusController {
 		//날짜 초기화
 		cal = Calendar.getInstance();
 		
-		
-		
-		for (StatusDTO status : statusList) {
-			System.out.println("statusList 반복문 진입");
-		    for (ReservationDTO reservation : reservationList) {
-		    	System.out.println("reservation 반복문 진입");
-		    	System.out.println("status 체크인 날짜 " +status.getS_checkin());
-	        	System.out.println("예약테이블 체크인 날짜 " + reservation.getR_checkin());
-		    	
-		        if (status.getS_checkin().equals(reservation.getR_checkin())) {
-		        	
-		        	if ("1".equals(reservation.getR_id())) {
-		        		
-		        	    System.out.println("예약방번호 1 = " + reservation.getR_id());
-		        	    status.setS_royalSweet("예약불가능");
-		        	    
-		        	} else if ("2".equals(reservation.getR_id())) {
-		        		
-		        	    System.out.println("예약방번호 2 = " + reservation.getR_id());
-		        	    status.setS_deluxe("예약불가능");
-		        	    
-		        	} else {
-		        		
-		        	    System.out.println("예약방번호 3 = " + reservation.getR_id());
-		        	    status.setS_standard("예약불가능");
-		        	}
-		            break; // 일치하는 예약을 찾았으므로 루프 종료
-		        }
-		    }
-		}
+		// 예약 정보 반복하면서 상태 업데이트
+	    for (ReservationDTO reservation : reservationList) {
+	    	 System.out.println("Reservation: " + reservation.getR_checkin() + " - " + reservation.getR_id());
+	    	
+	        for (StatusDTO status : statusList) {
+	            if (status.getS_checkin().equals(reservation.getR_checkin())) {
+	                switch (reservation.getR_type()) {
+	                    case "1":
+	                        status.setS_royalSweet("예약불가능");
+	                        break;
+	                    case "2":
+	                        status.setS_deluxe("예약불가능");
+	                        break;
+	                    case "3":
+	                        status.setS_standard("예약불가능");
+	                        break;
+	                }
+	                break; // 일치하는 예약을 찾았으므로 루프 종료
+	            }
+	        }
+	    }
 
 	    // 모델에 statusList를 추가하여 뷰에서 사용할 수 있도록 함
 	    model.addAttribute("statusList", statusList);
