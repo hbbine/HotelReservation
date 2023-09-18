@@ -45,7 +45,7 @@
 
 	<div class="container">
 		<div style=" display:flex; justify-content: center;">
-			<div class="col-lg-4 col-md-12 wow fadeInUp">
+			<div>
 				<div class="reservation-form">
 						<div class="row g-3">
 						<h2 class="block-title text-center">회원정보 수정</h2>
@@ -106,16 +106,27 @@
 <script>
 
 function deleteMember(m_id) {
-    var alertScript   = confirm('Are you sure you want to delete your info?');
+    // 사용자에게 확인 메시지를 표시
+    alert('정말 회원탈퇴를 진행하시겠습니까?');
 
-    if (alertScript) {
+    // 확인 버튼을 클릭하면 이동
+    var deleteURL = '${pageContext.request.contextPath}/deleteConfirm?m_id=' + m_id;
+    window.location.href = deleteURL;
+}
+
+/* function deleteMember(m_id) {
+    var alertScript   = confirm('정말 회원탈퇴를 진행하시겠습니까?');
+
+    if (alertScript == true) {
         // m_id를 URL 파라미터로 포함하여 deleteConfirm 페이지로 이동
         var deleteURL = '${pageContext.request.contextPath}/deleteConfirm?m_id=' + m_id;
         window.location.href = deleteURL;
     } else {
         // 사용자가 '취소'를 클릭한 경우, 아무 작업도 수행하지 않음
+    	window.location.href = '${pageContext.request.contextPath}/myInformation';
     }
-}
+} */
+
 </script>
 </body>
 </html>

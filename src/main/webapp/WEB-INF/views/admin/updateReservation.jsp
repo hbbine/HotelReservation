@@ -33,7 +33,7 @@
 </head>
 <body>
 
-	<%@ include file="./inc/header.jsp" %>
+	<%@ include file="../inc/header.jsp" %>
 	<!-- Header Start -->
 	<div>
 		<img class="img-fluid"

@@ -41,7 +41,7 @@
 	
 	<div class="container">
 	<div style="display: flex; justify-content: center;">
-	<div class="col-lg-4 col-md-12 wow fadeInUp">
+	<div>
 	<div class="reservationListform">
 	<h2 class="block-title text-center">예약 상황</h2>
 	<table class="table table-bordered table-custom">

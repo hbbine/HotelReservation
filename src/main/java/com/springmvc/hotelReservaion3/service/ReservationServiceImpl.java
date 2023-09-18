@@ -28,21 +28,41 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public List<ReservationDTO> getAllReservation() {
-		return mapper.getAllReservation();
-		
+		return mapper.getAllReservation();	
 	}
+	
 	@Override
 	public List<ReservationDTO> getPersonalReservaionList(String m_id) {
-		
 		return mapper.getPersonalReservaionList(m_id);
 	}
 
 	@Override
 	public int reservationCheck(String r_type, String formattedBeginDate, String formattedEndDate) throws Exception {
-		
 		return mapper.reservationCheck(r_type, formattedBeginDate, formattedEndDate);
 	}
 
+	@Override
+	public List<ReservationDTO> getAdminReservation() {
+		return mapper.getAdminReservation();
+	}
+
+	@Override
+	public void updateReservation(ReservationDTO dto) throws Exception {
+		mapper.updateReservation(dto);
+		
+	}
+
+	@Override
+	public ReservationDTO adminOneView(int id) {
+		return mapper.adminOneiew(id);
+	}
+
+
+
+	
+
+	
+	
 
 	
 

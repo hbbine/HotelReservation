@@ -12,6 +12,8 @@
 /* CSS 스타일을 적용할 표의 클래스를 지정합니다. */
 .table-custom {
 	width: 100%;
+	max-width: 800px; 
+    margin: 0 auto; 
 	font-size: 16px;
 }
 
@@ -19,10 +21,11 @@
 .table-custom thead th {
 	background-color: #f0f0f0;
 	font-weight: bold;
+	 padding: 10px;
 }
 /* 표의 데이터 셀에 스타일을 적용합니다. */
 .table-custom tbody td {
-	
+	 padding: 10px;
 }
 
 .admin-row {
@@ -45,7 +48,7 @@
 
 	<div class="container">
 		<div style="display: flex; justify-content: center;">
-			<div class="col-lg-4 col-md-12 wow fadeInUp">
+			<div>
 				<div class="boardListform">
 					<h4 class="block-title text-center"> &nbsp; &nbsp;${username}님의 예약 내역</h4>
 					<table class="table table-bordered table-custom">
@@ -53,12 +56,12 @@
 							<tr>
 								<th>예약번호</th>
 								<th>id</th>
-								<th>checkin</th>
-								<th>checkout</th>
-								<th>room Type</th>
-								<th>adults</th>
-								<th>kids</th>
-								<th>price</th>
+								<th>Check In</th>
+								<th>Check Out</th>
+								<th>Room Type</th>
+								<th>Adults</th>
+								<th>Kids</th>
+								<th>Price</th>
 							</tr>
 						</thead>
 						<tbody>

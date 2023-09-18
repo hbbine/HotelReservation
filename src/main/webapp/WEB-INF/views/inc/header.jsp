@@ -67,9 +67,7 @@
                     <div class="dropdown-menu fade-down m-0">
                         <a href="${pageContext.request.contextPath}/reservationList" class="dropdown-item">예약상황</a>
                         <a href="${pageContext.request.contextPath}/booking" class="dropdown-item">예약하기</a>
-                        <a href="${pageContext.request.contextPath}/reservation" class="dropdown-item">관리자페이지</a>
-                        <a href="${pageContext.request.contextPath}/reservation" class="dropdown-item">관리자 로그아웃</a>
-                      
+                        <a href="${pageContext.request.contextPath}/adminPage" class="dropdown-item">관리자페이지</a> 
                     </div>
                 </div>
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
@@ -98,5 +96,6 @@
 				</c:choose>
 </div>
 </nav>
+
 </body>
 </html>

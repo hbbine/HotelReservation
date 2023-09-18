@@ -55,7 +55,7 @@
 
 	<div class="container">
 		<div style=" display:flex; justify-content: center;">
-			<div class="col-lg-4 col-md-12 wow fadeInUp">
+			<div>
 				<div class="reservation-form">
 						<div class="row g-3">
 						<h2 class="block-title text-center">Join</h2>

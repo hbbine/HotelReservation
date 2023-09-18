@@ -17,26 +17,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.springmvc.hotelReservaion3.service.ReservationService;
 import com.springmvc.hotelReservation3.dto.MemberDTO;
 import com.springmvc.hotelReservation3.dto.ReservationDTO;
+import com.springmvc.hotelReservation3.dto.StatusDTO;
 
 @Controller
 public class ReservaionController {
 
 	@Autowired
 	ReservationService service;
-
-/* -------------------------예약 목록----------------------------*/
-	@GetMapping("/ReservationList")
-	public String showD01(Model model) {
-		
-		
-		
-		
-		
-		return "reservationList";
-	}
 
 /* -------------------------예약하기----------------------------*/
 	@GetMapping("/booking")
@@ -56,7 +48,7 @@ public class ReservaionController {
 	}
 	
 	@RequestMapping(value = "/booking", method = RequestMethod.POST)
-	public String reservation(@ModelAttribute("reservationForm") ReservationDTO reservationDTO, HttpSession session,
+	public String reservation(@ModelAttribute("reservationForm") ReservationDTO reservationDTO, HttpSession session,StatusDTO statusdto,
 		Model model) throws Exception {
 
 		// 체크인 체크아웃 날짜간 차이를 구한다
@@ -92,6 +84,15 @@ public class ReservaionController {
 		//예약 중복 체크
 		System.out.println("예약중복체크 함수 들어옴");
 		int result = service.reservationCheck(roomtype, formattedBeginDate, formattedEndDate);
+		
+//		int during = beginDate + diffDays;
+//		if(statusdto.getS_checkin().equals(formattedBeginDate)) {
+//			for(int i = 0; i < during; i++) {
+//				statusdto.setS_checkin("예약불가능");
+//			}
+//			
+//		}
+		
 		System.out.println("방타입 : " + roomtype + " 체크인 : " + formattedBeginDate + " 체크아웃 : " + formattedEndDate);
 		System.out.println("중복결과 : "+ result);
 		if(result != 0) {
@@ -105,7 +106,7 @@ public class ReservaionController {
 		}
 	}
 
-/* -------------------------Personal reservation List ----------------------------*/
+/* -------------------------개인 예약내역----------------------------*/
 
 	@GetMapping("/myReservation")
 	public String getPersonalReservationList(HttpServletRequest request, Model model) {
@@ -122,7 +123,7 @@ public class ReservaionController {
 	    return "/myReservation";
 	}	  
 	
-/* -------------------------예약상황에서 예약하기로 넘어가는 메서드----------------------------*/
+/* -------------------------reservationList에서 booking으로 넘어가는 메서드----------------------------*/
 	
 	@GetMapping("/bookingCheck")
 	public String bookingCheck(Model model, HttpServletRequest request) {
@@ -136,5 +137,35 @@ public class ReservaionController {
 	    	System.out.println("예약상황에서 예약하기로 넘어가기 <" + memberdto.getM_id() + "> check");
 	    	return "redirect:/booking";
 	    }	
+	}
+	
+/* -------------------------관리자 예약 목록----------------------------*/
+	@GetMapping("/admin/reservationList")
+	public String adminReservationList(Model model) {
+		List<ReservationDTO> getAdminReservationList = service.getAdminReservation();
+		model.addAttribute("list", getAdminReservationList);
+
+		return "/admin/reservationList";
+	}
+	
+/* -------------------------관리자 예약 수정----------------------------*/
+	
+	@GetMapping("/admin/updateReservation")
+	public String updateReservation(Model model, @RequestParam("r_id") String r_id,HttpServletRequest request ) {
+		
+		//현재 로그인된 세션 정보
+	    MemberDTO memberdto = (MemberDTO) request.getSession().getAttribute("LoginDTO");
+	    if(memberdto != null && memberdto.getM_id() != null) {
+	    	//r_id를 가지고 예약내역1개 가져옴
+	    	int id = Integer.parseInt(r_id);
+	    	ReservationDTO reservationdto = service.adminOneView(id);
+	    	
+	    	//가져온 예약내역을 jsp 폼으로 보내줌
+	    	model.addAttribute("list", reservationdto);
+	    	return"/admin/updateReservation";	
+	    }else {
+	    	//만약 로그인 정보가 없으면 로그인 페이지로 ㄱㄱ
+	    	return "redirect:/login";
+	    }
 	}
 }

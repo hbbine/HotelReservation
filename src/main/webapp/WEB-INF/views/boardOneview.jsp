@@ -88,8 +88,6 @@
 								class="btn btn-custom w-45"> 수정 </a>
 							<a href="${pageContext.request.contextPath}/deleteBoard?b_id=${board.b_id}"
 								class="btn btn-custom w-45"> 삭제 </a>	
-								
-							
 						</div>
 					</div>
 					<div id="alertMessage" style="display:none;"></div>

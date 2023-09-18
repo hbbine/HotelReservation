@@ -65,14 +65,21 @@ public class MemberController {
 	
 	@GetMapping("/myInformation")
 	public String updateBoard(Model model, HttpServletRequest request ) { //requestParam을 이용해서 url에 있는 id 값을 받아줌
-		// 지금 로그인된 세션 정보
-	    MemberDTO memberdto = (MemberDTO) request.getSession().getAttribute("LoginDTO"); //get now session info for convey joinform
-		model.addAttribute("joinForm", memberdto ); //담은 memberdto를 joinForm 폼으로 보내주면 이전에 썼던 글이 생성되어있음
 		
-		return"myInformation";
+		// 지금 로그인된 세션 정보
+	    MemberDTO memberdto = (MemberDTO) request.getSession().getAttribute("LoginDTO");
+
+	    if (memberdto != null && memberdto.getM_id() != null) {
+	    	//담은 memberdto를 joinForm 폼으로 보내주면 이전에 썼던 글이 생성되어있음
+	    	model.addAttribute("joinForm", memberdto ); 
+	    	return"myInformation";
+	    } else {
+	        // 로그인되지 않은 상태이므로 로그인 페이지로 이동
+	        return "redirect:/login";
+	    }
 	}
 	
-	@RequestMapping(value = "/myInformation", method = RequestMethod.POST)//수정 완료후 저장ㄴ
+	@RequestMapping(value = "/myInformation", method = RequestMethod.POST)//수정 완료후 저장
 	public String updateBoard(@ModelAttribute("joinForm") MemberDTO memberdto, Model model) throws Exception { 
 		
 		service.updateMyInformation(memberdto);
