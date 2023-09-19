@@ -23,7 +23,10 @@ public interface ReservationService {
 	
 	//admin 예약 수정
 	public void updateReservation(ReservationDTO dto) throws Exception;
-	
+
 	//admin 예약 1개 보기
 	public ReservationDTO adminOneView (int id);
+	
+	//admin 예약삭제
+	void deleteReservation(int r_id);
 }

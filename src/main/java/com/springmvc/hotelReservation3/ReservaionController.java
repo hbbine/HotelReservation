@@ -62,12 +62,9 @@ public class ReservaionController {
 		String formattedBeginDate = formatter.format(beginDate);
 		String formattedEndDate = formatter.format(endDate);
 
-		System.out.println("----Booking----");
-		System.out.println("숙박기간" +diffDays);
-
+		//방타입과 가격 설정
 		String roomtype = reservationDTO.getR_type();
-		System.out.println("roomtype" + roomtype);
-
+		
 		int roomPrice = 0;
 		if (roomtype.equals("1")) {
 			roomPrice = 800000;
@@ -76,25 +73,21 @@ public class ReservaionController {
 		} else {
 			roomPrice = 200000;
 		}
+		
 		int totalPrice = roomPrice * (int) diffDays;
 		reservationDTO.setR_price(totalPrice);
-
-		System.out.println("reservation total price" +totalPrice);
 
 		//예약 중복 체크
 		System.out.println("예약중복체크 함수 들어옴");
 		int result = service.reservationCheck(roomtype, formattedBeginDate, formattedEndDate);
 		
-//		int during = beginDate + diffDays;
-//		if(statusdto.getS_checkin().equals(formattedBeginDate)) {
-//			for(int i = 0; i < during; i++) {
-//				statusdto.setS_checkin("예약불가능");
-//			}
-//			
-//		}
-		
+		System.out.println("----Booking----");
+		System.out.println("숙박기간" +diffDays);
+		System.out.println("roomtype" + roomtype);
 		System.out.println("방타입 : " + roomtype + " 체크인 : " + formattedBeginDate + " 체크아웃 : " + formattedEndDate);
+		System.out.println("----중복체크----");
 		System.out.println("중복결과 : "+ result);
+		
 		if(result != 0) {
 			String alertScript = "중복예약입니다";
 	        model.addAttribute("alertScript", alertScript);
@@ -139,33 +132,5 @@ public class ReservaionController {
 	    }	
 	}
 	
-/* -------------------------관리자 예약 목록----------------------------*/
-	@GetMapping("/admin/reservationList")
-	public String adminReservationList(Model model) {
-		List<ReservationDTO> getAdminReservationList = service.getAdminReservation();
-		model.addAttribute("list", getAdminReservationList);
 
-		return "/admin/reservationList";
-	}
-	
-/* -------------------------관리자 예약 수정----------------------------*/
-	
-	@GetMapping("/admin/updateReservation")
-	public String updateReservation(Model model, @RequestParam("r_id") String r_id,HttpServletRequest request ) {
-		
-		//현재 로그인된 세션 정보
-	    MemberDTO memberdto = (MemberDTO) request.getSession().getAttribute("LoginDTO");
-	    if(memberdto != null && memberdto.getM_id() != null) {
-	    	//r_id를 가지고 예약내역1개 가져옴
-	    	int id = Integer.parseInt(r_id);
-	    	ReservationDTO reservationdto = service.adminOneView(id);
-	    	
-	    	//가져온 예약내역을 jsp 폼으로 보내줌
-	    	model.addAttribute("list", reservationdto);
-	    	return"/admin/updateReservation";	
-	    }else {
-	    	//만약 로그인 정보가 없으면 로그인 페이지로 ㄱㄱ
-	    	return "redirect:/login";
-	    }
-	}
 }

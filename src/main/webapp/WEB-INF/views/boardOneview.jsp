@@ -81,8 +81,7 @@
 						</tbody>
 					</table>
 					<div class="col-12 mt-3 d-flex justify-content-between align-items-center">
-						<a href="${pageContext.request.contextPath}/boardList"
-							class="btn btn-primary w-45"> 목록 </a>
+						<a href="${pageContext.request.contextPath}/boardList" class="btn btn-primary w-45"> 목록 </a>
 						<div class="d-flex gap-3">
 							<a href="${pageContext.request.contextPath}/updateBoard?b_id=${board.b_id}" onclick="updateBoard'${board.m_id}')"
 								class="btn btn-custom w-45"> 수정 </a>

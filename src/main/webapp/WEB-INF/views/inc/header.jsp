@@ -67,7 +67,7 @@
                     <div class="dropdown-menu fade-down m-0">
                         <a href="${pageContext.request.contextPath}/reservationList" class="dropdown-item">예약상황</a>
                         <a href="${pageContext.request.contextPath}/booking" class="dropdown-item">예약하기</a>
-                        <a href="${pageContext.request.contextPath}/adminPage" class="dropdown-item">관리자페이지</a> 
+                        
                     </div>
                 </div>
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
@@ -86,9 +86,16 @@
     						<span style="color: #06BBCC;">${username}&nbsp;</span>님 환영합니다!
 						</a>
         				<div class="dropdown-menu fade-down m-0">
-            			<a href="${pageContext.request.contextPath}/myReservation?m_id=${username}" class="dropdown-item">내 예약내역</a>
-            			
-            			<a href="${pageContext.request.contextPath}/myInformation" class="dropdown-item">회원 정보 수정</a>
+        					<c:choose>
+        						<c:when test="${username eq 'admin'}">
+        							<a href="${pageContext.request.contextPath}/myInformation" class="dropdown-item">회원 정보 수정</a>
+        							<a href="${pageContext.request.contextPath}/adminPage" class="dropdown-item">관리자페이지</a> 
+        						</c:when>
+        						<c:otherwise>
+        							<a href="${pageContext.request.contextPath}/myReservation?m_id=${username}" class="dropdown-item">내 예약내역</a>
+            						<a href="${pageContext.request.contextPath}/myInformation" class="dropdown-item">회원 정보 수정</a>
+        						</c:otherwise>
+        					</c:choose>
         				</div>
         				</div>
         				<a href="${pageContext.request.contextPath}/logout" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Logout<i class="fa fa-arrow-right ms-3"></i></a>

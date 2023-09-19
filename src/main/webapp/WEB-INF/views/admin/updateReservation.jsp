@@ -52,7 +52,7 @@
 						<form:form modelAttribute="reservationForm" method="post" class="reservations-box" >
 							<div class="col-12 ">
 								<div class="form-floating">
-									<form:hidden path="r_id" placeholder="reservationID" style="width: 100%;" value="${ r_id }" 
+									<form:hidden path="r_id" placeholder="reservationID" style="width: 100%;" value="${reservation.r_id }" 
 										required="true" data-error="ID is required." />
 								</div>
 							</div>
@@ -60,7 +60,7 @@
 							<div class="col-12">
 								<div class="form-floating">
 									<label for="m_id">Member ID</label>
-									<form:input path="m_id" value="${ m_id }" readonly="true" style="width: 100%;"
+									<form:input path="m_id" value="${reservation.m_id }" readonly="true" style="width: 100%;"
 										required="true" data-error="ID is required." />
 										
 								</div>
@@ -69,7 +69,7 @@
 							<div class="col-12">
 								<div class="form-floating">
 									<label for=r_checkin>Check In</label>
-									<form:input id ="r_checkin" value="${ r_checkin }"   path="r_checkin" placeholder="check In" type="text" style="width: 100%;"
+									<form:input id ="r_checkin" value="${ reservation.r_checkin }"   path="r_checkin" placeholder="check In" type="text" style="width: 100%;"
 										required="true" data-error="Checkin is required" pattern="\d{4}-\d{2}-\d{2}"
 										title="Please enter a date in the format YYYY-mm-dd." />
 									<script>
@@ -91,7 +91,7 @@
 							<div class="col-12">
 								<div class="form-floating">
 									<label for="r_checkout">Check Out</label>
-									<form:input id="r_checkout" value="${ r_checkout }"  path="r_checkout" placeholder="check Out" type="text" style="width: 100%;"
+									<form:input id="r_checkout" value="${ reservation.r_checkout }"  path="r_checkout" placeholder="check Out" type="text" style="width: 100%;"
 									required="true" data-error="Checkout is required." pattern="\d{4}-\d{2}-\d{2}"
 									title="Please enter a date in the format YYYY-mm-dd." />
 									<script>
@@ -113,7 +113,7 @@
 							<div class="col-12">
 								<div class="form-floating">
 									<label for="r_type">Room Type</label>
-									<form:select path="r_type"  value="${ r_type }"  class="r_type" required="true" style="width: 100%;" >
+									<form:select path="r_type"  value="${ reservation.r_type }"  class="r_type" required="true" style="width: 100%;" >
 										<form:option value="1">RoyalSweet</form:option>
 										<form:option value="2">Deluxe</form:option>
 										<form:option value="3">Standard</form:option>
@@ -124,7 +124,7 @@
 							<div class="col-12">
 								<div class="form-floating">
 									<label for="r_adults">Adults</label>
-										<form:select path="r_adults" value="${ r_adults }"  class="r_adults" style="width: 100%;" required="true">
+										<form:select path="r_adults" value="${ reservation.r_adults }"  class="r_adults" style="width: 100%;" required="true">
 											<form:option value="1">1</form:option>
 											<form:option value="2">2</form:option>
 											<form:option value="3">3</form:option>
@@ -135,7 +135,7 @@
 							<div class="col-12">
 								<div class="form-floating">
 									<label for="r_kids">Kids</label>
-									<form:select path="r_kids" value="${ r_kids }"  class="r_kids" style="width: 100%;"
+									<form:select path="r_kids" value="${ reservation.r_kids }"  class="r_kids" style="width: 100%;"
 											required="true">
 											<form:option value="1">1</form:option>
 											<form:option value="2">2</form:option>
@@ -146,7 +146,7 @@
 							
 							<div class="col-12">
 								<div class="form-floating">
-									<form:hidden path="r_price" value="${ r_price }" placeholder="r_price"
+									<form:hidden path="r_price" value="${ reservation.r_price }" placeholder="r_price"
 										required="true" data-error="ID is required." />
 								</div>
 							</div>
@@ -160,7 +160,10 @@
 
 							<div class="col-12">
 								<button class="btn btn-primary w-100 py-3" type="submit" value="submit" id="submit">
-									BOOK</button>
+									예약 수정</button>
+							</div>
+							<div class="d-flex gap-3 mt-3">
+    							<a href="${pageContext.request.contextPath}/admin/reservationList" class="btn btn-custom w-45">목록</a>
 							</div>
 							</form:form>
 						</div>
@@ -184,6 +187,7 @@ $(document).ready(function() {
     }
 });
 </script>
+
     <!-- JavaScript Libraries -->
  	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

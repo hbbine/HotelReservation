@@ -3,6 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,6 +70,7 @@
 								<th>Adults</th>
 								<th>Kids</th>
 								<th>Price</th>
+								<th>삭제</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -83,6 +85,9 @@
 									<td>${list.r_adults}</td>
 									<td>${list.r_kids}</td>
 									<td>${list.r_price}</td>
+									<td>
+           	 							<button class="delete-button" data-r-id="${list.r_id}">삭제</button>
+        							</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -92,5 +97,28 @@
 		</div>
 	</div>
 	<%@ include file="../inc/footer.jsp"%>
+	
+	<script>
+	$(document).ready(function() {
+	    // "삭제" 버튼 클릭 시 예약 삭제 동작 실행
+	    $(".delete-button").click(function() {
+	        var rId = $(this).data("r-id");
+	        if (confirm("예약을 삭제하시겠습니까?")) {
+	            // 삭제를 진행할 AJAX 요청을 여기에 추가
+	            $.ajax({
+	                url: "${pageContext.request.contextPath}/admin/deleteReservation?r_id=" + rId,
+	                type: "GET",
+	                success: function(data) {
+	                    // 삭제가 성공하면 페이지를 다시 로드하거나 예약 목록 업데이트 등의 작업을 수행할 수 있습니다.
+	                    location.reload();
+	                },
+	                error: function() {
+	                    alert("삭제 중 오류가 발생했습니다.");
+	                }
+	            });
+	        }
+	    });
+	});
+	</script>
 </body>
 </html>

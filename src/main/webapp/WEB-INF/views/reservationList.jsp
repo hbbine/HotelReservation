@@ -55,40 +55,40 @@
         </thead>
         <tbody>
             <c:forEach items="${statusList}" var="status">
-                <tr>
-                    <td>${status.s_checkin}</td>
-                    <td>
-                    	<c:choose>
-                    		<c:when test="${status.s_royalSweet == '예약불가능'}">
-                    			<span class="red-cell">${status.s_royalSweet}</span>
-                    		</c:when>
-                    		<c:otherwise>
-                    			<a href="${pageContext.request.contextPath}/bookingCheck" style="color: blue;">${status.s_royalSweet}</a>
-                    		</c:otherwise>
-                    	</c:choose>
-                    </td>
-                    <td>
-                    	<c:choose>
-                    		<c:when test="${status.s_deluxe == '예약불가능'}">
-                    			<span class="red-cell">${status.s_deluxe}</span>
-                    		</c:when>
-                    		<c:otherwise>
-                    			<a href="${pageContext.request.contextPath}/bookingCheck" style="color: blue;">${status.s_deluxe}</a>
-                    		</c:otherwise>
-                    	</c:choose>
-                    </td>
-                    <td>
-                    	<c:choose>
-                    		<c:when test="${status.s_standard == '예약불가능'}">
-                    			<span class="red-cell">${status.s_standard}</span>
-                    		</c:when>
-                    		<c:otherwise>
-                    			<a href="${pageContext.request.contextPath}/bookingCheck" style="color: blue;">${status.s_standard}</a>
-                    		</c:otherwise>
-                    	</c:choose>
-                    </td>
-                </tr>
-            </c:forEach>
+    <tr>
+        <td>${status.s_checkin}</td>
+        <td>
+            <c:choose>
+                <c:when test="${status.s_royalSweet == '예약불가능'}">
+                    <span class="red-cell">${status.s_royalSweet}</span>
+                </c:when>
+                <c:otherwise>
+                    <a href="${pageContext.request.contextPath}/bookingCheck" style="color: blue;">${status.s_royalSweet}</a>
+                </c:otherwise>
+            </c:choose>
+        </td>
+        <td>
+            <c:choose>
+                <c:when test="${status.s_deluxe == '예약불가능'}">
+                    <span class="red-cell">${status.s_deluxe}</span>
+                </c:when>
+                <c:otherwise>
+                    <a href="${pageContext.request.contextPath}/bookingCheck" style="color: blue;">${status.s_deluxe}</a>
+                </c:otherwise>
+            </c:choose>
+        </td>
+        <td>
+            <c:choose>
+                <c:when test="${status.s_standard == '예약불가능'}">
+                    <span class="red-cell">${status.s_standard}</span>
+                </c:when>
+                <c:otherwise>
+                    <a href="${pageContext.request.contextPath}/bookingCheck" style="color: blue;">${status.s_standard}</a>
+                </c:otherwise>
+            </c:choose>
+        </td>
+    </tr>
+</c:forEach>
         </tbody>
     </table>
     </div>

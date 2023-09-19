@@ -57,6 +57,12 @@ public class ReservationServiceImpl implements ReservationService {
 		return mapper.adminOneiew(id);
 	}
 
+	@Override
+	public void deleteReservation(int r_id) {
+		mapper.deleteBoard(r_id);
+		
+	}
+
 
 
 	

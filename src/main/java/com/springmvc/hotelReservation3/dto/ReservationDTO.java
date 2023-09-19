@@ -20,7 +20,7 @@ public class ReservationDTO {
 	
 
 	
-	private String r_id; //예약번호
+	private int r_id; //예약번호
 	private String m_id; //예약고객 ID
 	private String r_checkin; //체크인 날짜
 	private String r_checkout;//체크아웃 날짜
@@ -36,12 +36,12 @@ public class ReservationDTO {
 	}
 
 
-	public String getR_id() {
+	public int getR_id() {
 		return r_id;
 	}
 
 
-	public void setR_id(String r_id) {
+	public void setR_id(int r_id) {
 		this.r_id = r_id;
 	}
 
