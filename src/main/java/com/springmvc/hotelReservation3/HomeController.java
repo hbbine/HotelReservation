@@ -73,7 +73,7 @@ public class HomeController {
 		return"index";
 	}
 
-	@GetMapping("/adminPage")
+	@GetMapping("/admin/adminPage")
 	public String requestAdminPage(HttpServletRequest request, Model model) {
 
 		// 현재 로그인된 세션 정보
@@ -81,7 +81,7 @@ public class HomeController {
 
 		if (memberdto != null && memberdto.getM_id().equals("admin")) {
 
-			return "adminPage";
+			return "admin/adminPage";
 		} else {
 			String alertScript = "alert('관리자만 접근 할 수 있습니다.');";
 			model.addAttribute("alertScript", alertScript);

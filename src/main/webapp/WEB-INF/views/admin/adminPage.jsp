@@ -34,7 +34,7 @@
 </head>
 <body>
 
-<%@ include file="./inc/header.jsp" %>
+<%@ include file="../inc/header.jsp" %>
 	<!-- Header Start -->
 	<div>
 		<img class="img-fluid"
@@ -55,11 +55,11 @@
 
         <a href="/admin/editRoomIntroduction" class="btn btn-primary" style="margin-right: 10px;">방 소개 수정</a>
 
-        <a href="/admin/editMemberInfo" class="btn btn-primary" style="margin-right: 10px;">회원 정보 수정</a>
+        <a href="${pageContext.request.contextPath}/admin/memberInfo" class="btn btn-primary" style="margin-right: 10px;">회원 정보 수정</a>
     </div>
 </div>
 <div class="container py-5"></div>
-<%@ include file="./inc/footer.jsp"%>
+<%@ include file="../inc/footer.jsp"%>
 
 
 </body>

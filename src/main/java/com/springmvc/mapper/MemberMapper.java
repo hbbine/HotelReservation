@@ -1,5 +1,7 @@
 package com.springmvc.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -33,4 +35,8 @@ public interface MemberMapper {
 	//delete member
 	@Delete("DELETE FROM member WHERE m_id=#{m_id}")
 	void deleteMember(@Param ("m_id") String m_id) throws DataAccessException;
+	
+	//boardList
+	@Select("SELECT m_id, m_password, m_name, m_email, m_tel FROM member")
+	public List<MemberDTO> getAllMemberList();
 }

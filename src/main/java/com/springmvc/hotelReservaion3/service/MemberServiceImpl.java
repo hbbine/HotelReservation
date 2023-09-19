@@ -1,5 +1,7 @@
 package com.springmvc.hotelReservaion3.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +45,11 @@ public class MemberServiceImpl implements MemberService {
 	public void deleteMember(String m_id) {
 		mapper.deleteMember(m_id);
 		
+	}
+
+	@Override
+	public List<MemberDTO> getAllMemberList() {
+		return mapper.getAllMemberList();
 	}
 
 

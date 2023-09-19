@@ -1,5 +1,7 @@
 package com.springmvc.hotelReservaion3.service;
 
+import java.util.List;
+
 import com.springmvc.hotelReservation3.dto.BoardDTO;
 import com.springmvc.hotelReservation3.dto.MemberDTO;
 
@@ -19,4 +21,7 @@ public interface MemberService {
 	
 	//delete member
 	void deleteMember(String m_id);
+	
+	//회원 목록
+	public List<MemberDTO> getAllMemberList();
 }

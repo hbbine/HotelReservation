@@ -89,7 +89,7 @@
         					<c:choose>
         						<c:when test="${username eq 'admin'}">
         							<a href="${pageContext.request.contextPath}/myInformation" class="dropdown-item">회원 정보 수정</a>
-        							<a href="${pageContext.request.contextPath}/adminPage" class="dropdown-item">관리자페이지</a> 
+        							<a href="${pageContext.request.contextPath}/admin/adminPage" class="dropdown-item">관리자페이지</a> 
         						</c:when>
         						<c:otherwise>
         							<a href="${pageContext.request.contextPath}/myReservation?m_id=${username}" class="dropdown-item">내 예약내역</a>

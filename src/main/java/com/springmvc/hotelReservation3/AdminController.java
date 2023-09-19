@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.springmvc.hotelReservaion3.service.MemberService;
 import com.springmvc.hotelReservaion3.service.ReservationService;
 import com.springmvc.hotelReservation3.dto.BoardDTO;
 import com.springmvc.hotelReservation3.dto.MemberDTO;
@@ -25,6 +26,9 @@ public class AdminController {
 
 	@Autowired
 	ReservationService service;
+	
+	@Autowired
+	MemberService mservice;
 	
 /* -------------------------관리자 예약 목록----------------------------*/
 	@GetMapping("/admin/reservationList")
@@ -132,6 +136,30 @@ public class AdminController {
 	        return "redirect:/admin/reservationList";
 	    }
 	}
+/* -------------------------관리자 회원정보 목록----------------------------*/
 
+	@GetMapping(value = "/admin/memberInfo")
+	public String adminMemberInfo(Model model) {
+		
+		List<MemberDTO> getAdminMemberList = mservice.getAllMemberList();
+		model.addAttribute("list", getAdminMemberList);
 
+		return "/admin/memberInfo";
+	}
+	
+/* -------------------------관리자 회원정보 삭제----------------------------*/
+	
+	@GetMapping(value = "/admin/deleteMember")
+	public String deleteMember(Model model, @RequestParam ("m_id") String m_id ) {
+		
+		System.out.println(m_id + "님 회원정보 관리자 권한으로 삭제");
+		mservice.deleteMember(m_id);
+		
+		return "redirect:/admin/memberInfo";
+		
+		
+		
+	}
+	
+	
 }
