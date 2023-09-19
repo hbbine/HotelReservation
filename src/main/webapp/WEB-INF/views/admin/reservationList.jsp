@@ -92,6 +92,11 @@
 							</c:forEach>
 						</tbody>
 					</table>
+					
+					<div style="display: flex; justify-content: center;">
+        			<a href="${pageContext.request.contextPath}/admin/adminPage" class="btn btn-primary" style="margin-right: 10px;">관리자페이지</a>
+        			</div>
+        			
 				</div>
 			</div>
 		</div>

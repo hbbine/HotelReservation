@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.springmvc.hotelReservaion3.service.BoardService;
 import com.springmvc.hotelReservaion3.service.MemberService;
 import com.springmvc.hotelReservaion3.service.ReservationService;
 import com.springmvc.hotelReservation3.dto.BoardDTO;
@@ -29,6 +30,9 @@ public class AdminController {
 	
 	@Autowired
 	MemberService mservice;
+	
+	@Autowired
+	BoardService bservice;
 	
 /* -------------------------관리자 예약 목록----------------------------*/
 	@GetMapping("/admin/reservationList")
@@ -157,9 +161,47 @@ public class AdminController {
 		
 		return "redirect:/admin/memberInfo";
 		
-		
-		
 	}
+	
+/* -------------------------관리자 공지 목록 불러오기----------------------------*/
+	
+	@GetMapping(value = "/admin/adminPost")
+	public String adminPost(Model model) {
+		
+		List<BoardDTO> getAdminPost = bservice.getAllAdminPost();
+		model.addAttribute("list", getAdminPost);
+
+		return "/admin/adminPost";
+	}
+	
+/* -------------------------관리자 공지 원글 보기----------------------------*/
+	
+	@GetMapping("/admin/adminPostOneview") //화면 불러오기전 가져올 값들
+	public String boardOneview(Model model, @RequestParam("b_id") int b_id ) {
+		
+		//게시글 정보 가져오기
+		BoardDTO boarddto = bservice.adminOneview(b_id); //게시판 테이블에서 글번호가져와서 model에 넣고 jsp화면으로 보내기
+		
+		//게시글 조회수
+		int cnt = boarddto.getB_viewcnt()+1;
+		bservice.updateViewCnt(b_id, cnt); //조회수 함수 불러오기
+		
+		model.addAttribute("board", boarddto);
+
+		return "/admin/adminPostOneview";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

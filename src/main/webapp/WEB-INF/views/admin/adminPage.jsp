@@ -51,7 +51,7 @@
     
         <a href="${pageContext.request.contextPath}/admin/reservationList" class="btn btn-primary" style="margin-right: 10px;">회원 예약 수정</a>
 
-        <a href="/admin/editAdminPosts" class="btn btn-primary" style="margin-right: 10px;">관리자 글 수정</a>
+        <a href="${pageContext.request.contextPath}/admin/adminPost" class="btn btn-primary" style="margin-right: 10px;">관리자 글 수정</a>
 
         <a href="/admin/editRoomIntroduction" class="btn btn-primary" style="margin-right: 10px;">방 소개 수정</a>
 

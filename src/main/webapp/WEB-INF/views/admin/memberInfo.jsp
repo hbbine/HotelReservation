@@ -58,7 +58,6 @@
 				<div class="boardListform">
 					<h4 class="block-title text-center"> &nbsp; &nbsp; 전체 회원 예약 내역</h4>
 					<br/>
-					<h6 class="block-title text-left"> &nbsp; &nbsp; 클릭하면 수정하기로 들어갑니다</h6>
 					<table class="table table-bordered table-custom">
 						<thead>
 							<tr>
@@ -67,7 +66,7 @@
 								<th>Name</th>
 								<th>Email</th>
 								<th>Tel</th>
-								<th>삭제</th>
+								<th>탈퇴</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -80,12 +79,16 @@
 									<td>${list.m_email}</td>
 									<td>${list.m_tel}</td>
 									<td>
-           	 							<button class="delete-button" data-m-id="${list.m_id}">삭제</button>
+           	 							<button class="delete-button" data-m-id="${list.m_id}">탈퇴</button>
         							</td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
+					
+					<div style="display: flex; justify-content: center;">
+        			<a href="${pageContext.request.contextPath}/admin/adminPage" class="btn btn-primary" style="margin-right: 10px;">관리자페이지</a>
+        			</div>
 				</div>
 			</div>
 		</div>

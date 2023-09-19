@@ -27,4 +27,10 @@ public interface BoardService {
 
 	//관리자 게시글 업데이트
 	void updateAdminPost(String m_id);
+	
+	//관리자 공지 목록
+	public List<BoardDTO> getAllAdminPost();
+	
+	//관리자 공지 원글보기
+	public BoardDTO adminOneview(int id);
 }

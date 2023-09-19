@@ -43,5 +43,13 @@ public interface BoardMapper {
 	@Update("UPDATE board SET is_admin = 1 WHERE m_id = #{m_id}")
 	void updateAdminPost(@Param("m_id") String m_id);
 	
+	//select admin post
+	@Select("SELECT b_id, m_id, b_title, b_date, b_viewcnt, is_admin FROM board WHERE is_admin = 1 ORDER BY b_date desc")
+	public List<BoardDTO> getAllAdminBoardList();
+	
+	//admin one view
+	@Select("SELECT * FROM board WHERE b_id = #{b_id}")
+	public BoardDTO adminOneView(@Param("b_id") int b_id) throws DataAccessException;
+	
 	
 }

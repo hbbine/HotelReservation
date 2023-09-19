@@ -54,6 +54,18 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
+	@Override
+	public List<BoardDTO> getAllAdminPost() {
+	
+		return mapper.getAllAdminBoardList();
+	}
+
+	@Override
+	public BoardDTO adminOneview(int id) {
+		
+		return mapper.adminOneView(id);
+	}
+
 
 	
 	
