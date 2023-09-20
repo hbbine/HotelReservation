@@ -191,7 +191,49 @@ public class AdminController {
 		return "/admin/adminPostOneview";
 	}
 	
+/* -------------------------관리자 공지 원글 수정----------------------------*/
 	
+	@GetMapping("/admin/updateAdminPost")
+	public String updateAdminPost(Model model, @RequestParam("b_id") int b_id) {
+		
+		//b_id를 통해 게시글을 찾아서 BoardDTO형태의 boarddto에 넣고 그걸 model을 통해 'boardform'이라는 이름으로 보내주기
+		BoardDTO boarddto = bservice.boardoneView(b_id);
+		model.addAttribute("boardForm", boarddto);
+
+		return "/admin/updateAdminPost";
+	}
+	
+	@RequestMapping(value = "/admin/updateAdminPost", method = RequestMethod.POST)
+	public String updateAdminPost(@ModelAttribute("boardForm") BoardDTO boarddto, Model model, HttpServletRequest request) throws Exception{
+		
+		// 현재 로그인된 세션 정보
+	    MemberDTO memberdto = (MemberDTO) request.getSession().getAttribute("LoginDTO");
+		
+		int b_id = boarddto.getB_id();
+		bservice.updateBoard(boarddto);
+		bservice.updateAdminPost(memberdto.getM_id());
+		
+		return "redirect:/admin/adminPostOneview?b_id=" + b_id;
+	}
+	
+/* -------------------------관리자 공지 삭제----------------------------*/		
+	@GetMapping(value = "/admin/deleteAdminPost")
+	public String deleteAdminPost(Model model, @RequestParam("b_id") int b_id, HttpServletRequest request) throws Exception{
+		
+		//지금 로그인된 세션 정보
+	    MemberDTO memberdto = (MemberDTO) request.getSession().getAttribute("LoginDTO");
+	    
+	    if(memberdto == null) {
+	    	String alertScript = "alert('로그인 후에 삭제할 수 있습니다.');";
+	        model.addAttribute("alertScript", alertScript);
+	        return "redirect:/admin/adminPostOneview?b_id=" + b_id;
+	    }else {
+	    	bservice.deleteBoard(b_id);
+			return "redirect:/admin/adminPost"; 
+	    }
+		
+		
+	}
 	
 	
 	
