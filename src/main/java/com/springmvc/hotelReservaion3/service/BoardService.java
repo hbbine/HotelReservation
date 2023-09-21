@@ -3,6 +3,7 @@ package com.springmvc.hotelReservaion3.service;
 import java.util.List;
 
 import com.springmvc.hotelReservation3.dto.BoardDTO;
+import com.springmvc.hotelReservation3.dto.PageDTO;
 
 
 public interface BoardService {
@@ -33,4 +34,12 @@ public interface BoardService {
 	
 	//관리자 공지 원글보기
 	public BoardDTO adminOneview(int id);
+	
+	//게시판 페이지네이션
+	List<BoardDTO> getPageBoardList(PageDTO pagedto) throws Exception;
+	
+	//게시판 전체 글 수
+	public int getCountBoard();
+
+	
 }

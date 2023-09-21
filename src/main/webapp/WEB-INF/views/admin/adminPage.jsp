@@ -53,8 +53,6 @@
 
         <a href="${pageContext.request.contextPath}/admin/adminPost" class="btn btn-primary" style="margin-right: 10px;">관리자 글 수정</a>
 
-        <a href="/admin/editRoomIntroduction" class="btn btn-primary" style="margin-right: 10px;">방 소개 수정</a>
-
         <a href="${pageContext.request.contextPath}/admin/memberInfo" class="btn btn-primary" style="margin-right: 10px;">회원 정보 수정</a>
     </div>
 </div>

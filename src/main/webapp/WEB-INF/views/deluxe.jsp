@@ -51,10 +51,6 @@
 						<li>Free toiletries</li>
 					</ul>
 
-					<!-- 				<div class="book_now_button"><a href="#">Book Now</a></div>
-					
-				</div> -->
-
 					<div class="container py-5"></div>
 
 				</div>

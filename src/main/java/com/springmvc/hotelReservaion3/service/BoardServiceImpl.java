@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.springmvc.hotelReservation3.dto.BoardDTO;
+import com.springmvc.hotelReservation3.dto.PageDTO;
 import com.springmvc.mapper.BoardMapper;
 
 @Service
@@ -65,6 +66,26 @@ public class BoardServiceImpl implements BoardService {
 		
 		return mapper.adminOneView(id);
 	}
+
+	@Override
+	public List<BoardDTO> getPageBoardList(PageDTO pagedto) throws Exception {
+		
+		long totalCount = mapper.getCountBoard();
+		pagedto.setRow();
+		pagedto.setNum(totalCount);
+		
+		return mapper.getPageBoardList(pagedto);
+	}
+
+	@Override
+	public int getCountBoard() {
+		
+		return mapper.getCountBoard();
+	}
+
+	
+
+	
 
 
 	

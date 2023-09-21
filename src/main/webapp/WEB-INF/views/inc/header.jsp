@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
-                 	<a href="${pageContext.request.contextPath}/boardList" class="nav-item nav-link">Q & A</a>
+                 	<a href="${pageContext.request.contextPath}/boardListPage" class="nav-item nav-link">Q & A</a>
                  	
                 <c:choose>
     				<c:when test="${empty sessionScope.LoginDTO}">

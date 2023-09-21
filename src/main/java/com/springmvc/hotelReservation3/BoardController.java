@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.springmvc.hotelReservaion3.service.BoardService;
 import com.springmvc.hotelReservation3.dto.BoardDTO;
 import com.springmvc.hotelReservation3.dto.MemberDTO;
+import com.springmvc.hotelReservation3.dto.PageDTO;
 import com.springmvc.hotelReservation3.dto.ReservationDTO;
 
 @Controller
@@ -171,6 +173,23 @@ public class BoardController {
 	        return "redirect:/boardOneview?b_id=" + b_id;
 	    }
 	}
+	
+/* -------------------------게시판 목록보기 with page----------------------------*/	
+	
+	@GetMapping(value = "/boardListPage")
+	public ModelAndView getBoard(PageDTO pagedto) throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		List<BoardDTO> list = service.getPageBoardList(pagedto);
+		
+		mv.addObject("list", list);
+		mv.addObject("pagedto", pagedto);
+		mv.setViewName("/boardListPage");
+		
+		return mv;
+		
+	}
+	
 }
 
 

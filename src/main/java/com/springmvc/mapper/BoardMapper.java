@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.dao.DataAccessException;
 
 import com.springmvc.hotelReservation3.dto.BoardDTO;
+import com.springmvc.hotelReservation3.dto.PageDTO;
 
 @Mapper
 public interface BoardMapper {
@@ -50,6 +51,15 @@ public interface BoardMapper {
 	//admin one view
 	@Select("SELECT * FROM board WHERE b_id = #{b_id}")
 	public BoardDTO adminOneView(@Param("b_id") int b_id) throws DataAccessException;
+	
+	//board pagination
+	@Select("SELECT b_id, m_id, b_title, b_date, b_viewcnt, is_admin FROM board ORDER BY is_admin DESC, b_date DESC LIMIT #{startRow}, #{perPage}")
+	public List<BoardDTO> getPageBoardList(PageDTO pagedto);
+	
+	//board pagination with count
+	@Select("SELECT COUNT(b_id) FROM board")
+	public int getCountBoard();
+
 	
 	
 }
