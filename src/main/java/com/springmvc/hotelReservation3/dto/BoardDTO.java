@@ -11,8 +11,12 @@ public class BoardDTO {
     b_content TEXT NOT NULL,
     b_date timestamp,
     b_viewcnt INT NOT NULL,
+    b_thumbImg varchar(200),
     is_admin BOOLEAN NOT NULL DEFAULT '0'
 	) DEFAULT CHARSET=utf8mb4;
+	
+	alter table board add(b_img varchar(200));
+	alter table board add(b_thumbImg varchar(200));
 	 */
 	
 	private int b_id;
@@ -23,6 +27,8 @@ public class BoardDTO {
 	private String b_date;
 	private int b_viewcnt;
 	private boolean is_admin;
+	private String b_thumbImg;
+	private String b_img;
 	
 	public BoardDTO() {
 		super();
@@ -90,6 +96,22 @@ public class BoardDTO {
 
 	public void setIs_admin(boolean is_admin) {
 		this.is_admin = is_admin;
+	}
+
+	public String getB_thumbImg() {
+		return b_thumbImg;
+	}
+
+	public void setB_thumbImg(String b_thumbImg) {
+		this.b_thumbImg = b_thumbImg;
+	}
+
+	public String getB_img() {
+		return b_img;
+	}
+
+	public void setB_img(String b_img) {
+		this.b_img = b_img;
 	}
 
 	

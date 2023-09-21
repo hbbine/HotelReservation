@@ -1,6 +1,9 @@
 package com.springmvc.hotelReservation3;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,23 +13,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.springmvc.hotelReservaion3.service.BoardService;
 import com.springmvc.hotelReservation3.dto.BoardDTO;
+import com.springmvc.hotelReservation3.dto.FileDTO;
 import com.springmvc.hotelReservation3.dto.MemberDTO;
 import com.springmvc.hotelReservation3.dto.PageDTO;
 import com.springmvc.hotelReservation3.dto.ReservationDTO;
+import com.springmvc.hotelReservation3.utils.UploadFileUtils;
 
 @Controller
 public class BoardController {
 
+	
 	@Autowired
 	BoardService service;
 	
@@ -55,12 +64,32 @@ public class BoardController {
 	
 	@RequestMapping(value = "/writeBoard", method = RequestMethod.POST) //화면 불러오고 나서 다시 입력할 값들
 	public String insertBoard(@ModelAttribute("boardForm") BoardDTO boarddto, HttpSession session,
-		HttpServletRequest request,	Model model) throws Exception {
+		HttpServletRequest request,	Model model, MultipartFile file) throws Exception {
 		
 		//현재 로그인 정보를 MemberDTO에 담아서 가져옴
 		MemberDTO memberdto = (MemberDTO) session.getAttribute("LoginDTO");
 	    String m_id = memberdto.getM_id();
 	    
+	    //파일업로드
+		String uploadPath = "C:\\SpringWorkspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\HotelReservaion3\\resources\\imgUpload";
+		String imgUploadPath = uploadPath + java.io.File.separator;
+
+		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+		String fileName = null;
+		
+		System.out.println(uploadPath);
+		System.out.println(imgUploadPath);
+		System.out.println(ymdPath);
+		System.out.println(fileName);
+		
+		if(file != null) {
+			 fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
+			} else {
+			 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+			}
+		
+		boarddto.setB_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+		boarddto.setB_thumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 	    
 	    service.insertBoard(boarddto);
 		//만약 관리자 아이디라면 post에 권한 추가
@@ -189,6 +218,142 @@ public class BoardController {
 		return mv;
 		
 	}
+
+/* -------------------------게시판 파일 업로드----------------------------*/	
+	
+	@GetMapping("/upload")
+	public void form() {
+		
+	}
+	
+	@PostMapping("/upload_ok")
+	public String uploadFile(@RequestParam("file") MultipartFile file) {
+		
+		String fileRealName = file.getOriginalFilename(); //파일 명을 얻을수있는 메서드
+		long size = file.getSize(); //파일 사이즈
+		
+		System.out.println("파일명 : " + fileRealName);
+		System.out.println("용량크기(byte) : " + size);
+		
+		//서버에 저장할 파일 확장자 구하기( . 뒤에서부터 끝까지 자르기)
+		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
+		String uploadFolder = "C:\\test\\upload";
+		
+		/*
+		 	파일 업로드시 동일한 파일명이 있을수도 있기때문에 
+		 	랜덤숫자를 이용해서 서버에 저장할 파일명은 새롭게 만듦 
+		 */
+		
+		UUID uuid = UUID.randomUUID();
+		System.out.println(uuid.toString());
+		String[] uuids = uuid.toString().split("-");
+		
+		String uniqueName = uuids[0];
+		System.out.println("생성된 문자열" + uniqueName);
+		System.out.println("확장자명" + fileExtension);
+		
+		//File saveFile = new File(uploadFolder + "\\" + fileRealName); 적용전
+		File saveFile = new File(uploadFolder + "\\" + uniqueName + fileExtension); //적용후
+		
+		try {
+			file.transferTo(saveFile); //실제파일 저장 메서드
+		}catch(IllegalStateException e) {
+			e.printStackTrace();
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		return "fileupload/upload_ok";
+
+	}
+	
+	@PostMapping("/upload_ok2")
+	public String upload2(MultipartHttpServletRequest files) {
+		
+
+		//서버에서 저장 할 경로
+		String uploadFolder = "C:\\test\\upload";
+		List<MultipartFile> list = files.getFiles("files");
+		for(int i = 0; i<list.size(); i++) {
+			String fileRealName = list.get(i).getOriginalFilename();
+			long size = list.get(i).getSize();
+			
+			System.out.println("파일명 :" + fileRealName);
+			System.out.println("사이즈" + size);
+			
+			File saveFile = new File(uploadFolder + "\\" + fileRealName);
+			try {
+				list.get(i).transferTo(saveFile);
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	
+		return "fileupload/upload_ok";
+	}
+	
+	
+	//이미지 업로드
+	@RequestMapping(value="board/register", method = RequestMethod.POST)
+	public String imgUpload(BoardDTO boarddto, MultipartFile file) throws Exception{
+		
+		String uploadPath = "C:\\SpringWorkspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\HotelReservaion3\\resources\\imgUpload";
+		String imgUploadPath = uploadPath + File.separator + "imgUpload";
+
+		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+		String fileName = null;
+		
+		if(file != null) {
+			 fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
+			} else {
+			 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+			}
+		
+		boarddto.setB_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+		boarddto.setB_thumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+		
+		
+		
+		return null;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
 

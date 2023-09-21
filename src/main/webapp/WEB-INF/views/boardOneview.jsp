@@ -17,7 +17,7 @@
 
 /* 표의 헤더 셀(제목 행)에 스타일을 적용합니다. */
 .table-custom thead th {
-	background-color: #f0f0f0;
+	//background-color: white;
 	font-weight: bold;
 }
 
@@ -40,6 +40,14 @@
 		color:red; 
 		display: none;
 	}
+	.oriImg{
+	width:500px;
+	height:auto;
+	}
+	
+	.thumbImg{}
+	
+	
 </style>
 
 </head>
@@ -67,9 +75,20 @@
 
 							</tr>
 							<tr>
-								<td colspan="5">
+								<td colspan="5" style="text-align:center;">
+									<p></p> 
+									
+									<!--  이미지 업로드 -->
+									<c:if test="${not empty board.b_img }">
+									<img src="${pageContext.request.contextPath}/${board.b_img}" class="img-fluid oriImg" /> 
+									</c:if>
+									<!--  이미지 업로드 끝 -->
+									
+									<p></p> 
+									<%-- <p>썸네일 이미지</p> 
+									<img src="${pageContext.request.contextPath}/${board.b_thumbImg}" alt="썸네일 이미지" class="img-fluid thumbImg" /> --%>
 									<div class="form-group">
-										<textarea class="form-control" rows="10" readonly="true">${board.b_content}</textarea>
+										<textarea class="form-control" rows="10" rows="10" readonly="true">${board.b_content}</textarea>
 									</div>
 								</td>
 							</tr>
@@ -81,7 +100,7 @@
 						</tbody>
 					</table>
 					<div class="col-12 mt-3 d-flex justify-content-between align-items-center">
-						<a href="${pageContext.request.contextPath}/boardList" class="btn btn-primary w-45"> 목록 </a>
+						<a href="${pageContext.request.contextPath}/boardListPage" class="btn btn-primary w-45"> 목록 </a>
 						<div class="d-flex gap-3">
 							<a href="${pageContext.request.contextPath}/updateBoard?b_id=${board.b_id}" onclick="updateBoard'${board.m_id}')"
 								class="btn btn-custom w-45"> 수정 </a>

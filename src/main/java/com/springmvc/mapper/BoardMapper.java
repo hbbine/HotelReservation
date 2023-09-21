@@ -17,7 +17,8 @@ import com.springmvc.hotelReservation3.dto.PageDTO;
 public interface BoardMapper {
 
 	//insert board table
-	@Insert("INSERT INTO board(m_id, m_password, b_title, b_content, b_date, b_viewcnt) VALUES(#{m_id}, #{m_password},#{b_title}, #{b_content},NOW(), #{b_viewcnt})")
+	@Insert("INSERT INTO board(m_id, m_password, b_title, b_content, b_date, b_viewcnt, b_thumbImg, b_img) "
+			+ "VALUES(#{m_id}, #{m_password},#{b_title}, #{b_content},NOW(), #{b_viewcnt},#{b_thumbImg},#{b_img})")
 	public void insertBoard(BoardDTO dto);
 	
 	//boardList
