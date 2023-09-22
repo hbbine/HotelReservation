@@ -123,10 +123,7 @@
 										reader.readAsDataURL(this.files[0]);
 										}
 									});
-								</script>
-							
-								<%=request.getRealPath("/") %>
-							
+								</script>			
 						</div>
 							<div class="col-12">
 								<button class="btn btn-primary w-100 py-3" type="submit"

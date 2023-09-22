@@ -16,8 +16,8 @@ public class PageDTO {
 	
 	public PageDTO() {
 		this.page=1L;
-		this.perPage=10L;
-		this.perBlock=10L;
+		this.perPage=5L;
+		this.perBlock=3L;
 	}
 	
 	public void setRow() {
@@ -32,41 +32,36 @@ public class PageDTO {
 	}
 	
 	public void setNum(long totalCount) {
-		// 게시판글 총 갯수로 전체 페이지 수 구함
-		// 전체 똑 떨어지면 그대로 페이지수 하고 나누어떨어지지않으면 전체페이지수 +1 하기
-		this.totalPage = totalCount % this.getPerPage() == 0 ? totalCount/this.getPerPage() : totalCount/this.getPerPage() + 1;
-		
-		// 전체페이지수로 전체 블록 수를 구함 (하단 << < 1 2 3 4 5 > >>) 이 부분
-		long totalBlock = totalPage % this.getPerBlock() == 0 ? totalPage/this.getPerBlock() : totalPage/this.getPerBlock() + 1;
-		
-		//현재페이지 현재블록 구하기
-		long curBlock = this.getPage() % this.getPerBlock() == 0? this.getPage() / this.getPerBlock() : this.getPage()/this.getPerBlock() + 1;
-		
-		//현재블록의 시작점 끝점 구하기
-		this.startNum = (curBlock - 1) * this.getPerBlock() + 1;
-		this.lastNum = curBlock * this.getPerBlock();
-		
-		//현재블록이 마지막블록이면 lastnum은 마지막 페이지 번호
-		if(curBlock == totalBlock) {
-			this.lastNum=totalPage;
-		}
-		
-		
-		
-		//두번째 페이지부터 이전버튼 활성화
-		if(this.page < 1) {
-			this.page = 1;
-			
-		}
-		pre = this.page > 1;
-		
-		//현재블록이 마지막 블록보다 작으면 다음버튼 활성화
-		if(curBlock < totalBlock) {
-			next=true;
-		}else {
-			next=false;
-		}
-	}
+        // 게시판글 총 갯수로 전체 페이지 수 구함
+        // 전체 똑 떨어지면 그대로 페이지수 하고 나누어떨어지지않으면 전체페이지수 +1 하기
+        this.totalPage = totalCount % this.getPerPage() == 0 ? totalCount / this.getPerPage() : totalCount / this.getPerPage() + 1;
+
+        // 전체페이지수로 전체 블록 수를 구함 (하단 << < 1 2 3 4 5 > >>) 이 부분
+        long totalBlock = totalPage % this.getPerBlock() == 0 ? totalPage / this.getPerBlock() : totalPage / this.getPerBlock() + 1;
+
+        // 현재페이지 현재블록 구하기
+        long curBlock = this.getPage() % this.getPerBlock() == 0 ? this.getPage() / this.getPerBlock()
+                : this.getPage() / this.getPerBlock() + 1;
+
+        // 현재블록의 시작점 끝점 구하기
+        this.startNum = (curBlock - 1) * this.getPerBlock() + 1;
+        this.lastNum = curBlock * this.getPerBlock();
+
+        // 현재블록이 마지막블록이면 lastnum은 마지막 페이지 번호
+        if (curBlock == totalBlock) {
+            this.lastNum = totalPage;
+        }
+
+        // 이전 버튼 활성화 여부를 설정
+        pre = this.getStartNum() > 1;
+        pre = this.startNum == 1 ? false : true;
+
+        // 다음 버튼 활성화 여부를 설정
+        next = this.getLastNum() * this.getPerPage() < totalCount;
+        
+        
+    }
+
 	
 	
 	public long getPage() {

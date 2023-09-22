@@ -119,22 +119,24 @@
 
         <div>
             <ul class="pagination">
-                <li class="page-item" value="${pagedto.pre}" id="pre">
-                    <a class="page-link" href="${pageContext.request.contextPath}/boardListPage?page=${pagedto.page - 1}" aria-label="Previous">
-                        <span aria-hidden="true"></span>
-                    </a>
-                </li>
-
+            
+                <!-- 이전 -->
+               <li class="page-item" value="${pagedto.pre}" id="pre" style="display: ${pagedto.pre ? 'block' : 'none'};">
+    				<a class="page-link" href="${pageContext.request.contextPath}/boardListPage?page=${pagedto.page - 1}" aria-label="Previous">이전</a>
+				</li>
+                
+				<!-- 현재 블록 -->
                 <c:forEach var="i" begin="${pagedto.startNum}" end="${pagedto.lastNum}">
                     <li class="page-item ${pagedto.page == i ? 'active' : ''}">
-                        <a class="page-link" href="${pageContext.request.contextPath}/boardListPage?page=${i}">${i}</a>
+                         <a class="page-link" href="${pageContext.request.contextPath}/boardListPage?page=${i}" style="${pagedto.page == i ? 'font-weight: bold;' : ''}">${i}</a>
                     </li>
                 </c:forEach>
-                <li class="page-item ${pagedto.next ? '' : 'disabled'}" id="next">
-                    <a class="page-link" href="${pageContext.request.contextPath}/boardListPage?page=${pagedto.page + 1}" aria-label="Next">
-                        <span aria-hidden="true"></span>
-                    </a>
-                </li>
+                
+                <!-- 다음 -->
+              <li class="page-item ${pagedto.next}" id="next" style="display: ${pagedto.next ? 'block' : 'none'};">
+    			<a class="page-link" href="${pageContext.request.contextPath}/boardListPage?page=${pagedto.page + 1}" aria-label="Next">다음</a>
+			</li>
+                
             </ul>
         </div>
     </div>
