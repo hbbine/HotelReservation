@@ -119,33 +119,33 @@
              <a href="${pageContext.request.contextPath}/writeBoard" class="btn btn-primary">Write</a>
          </div>
 
-	<!-- 페이징 -->
-        <div>
-            <ul class="pagination">
-                <!-- 이전 -->
-               <li class="page-item" value="${pagedto.pre}" id="pre" style="display: ${pagedto.pre ? 'block' : 'none'};">
-    				<a class="page-link" href="${pageContext.request.contextPath}/boardListPage?page=${pagedto.page - 1}" aria-label="Previous">이전</a>
-				</li>
-                
+		<!-- 페이징 -->
+		<div>
+			<ul class="pagination">
+				<!-- 이전 -->
+				<li class="page-item ${pagedto.pre}" id="pre" style="display: ${pagedto.pre ? 'block' : 'none'};">
+				<a class="page-link" href="${pageContext.request.contextPath}/boardListSearch2?page=${pagedto.page - 1}&searchType=${pagedto.searchType}&keyword=${pagedto.keyword}"
+				aria-label="Previous">이전</a></li>
+
 				<!-- 현재 블록 -->
-                <c:forEach var="i" begin="${pagedto.startNum}" end="${pagedto.lastNum}">
-                    <li class="page-item ${pagedto.page == i ? 'active' : ''}">
-                         <a class="page-link" href="${pageContext.request.contextPath}/boardListPage?page=${i}" style="${pagedto.page == i ? 'font-weight: bold;' : ''}">${i}</a>
-                    </li>
-                </c:forEach>
-                
-                <!-- 다음 -->
-              <li class="page-item ${pagedto.next}" id="next" style="display: ${pagedto.next ? 'block' : 'none'};">
-    			<a class="page-link" href="${pageContext.request.contextPath}/boardListPage?page=${pagedto.page + 1}" aria-label="Next">다음</a>
-			</li>
-                
-            </ul>
-        </div>
+				<c:forEach var="i" begin="${newPagedto.startNum}" end="${newPagedto.lastNum}">
+    				<li class="page-item ${newPagedto.page == i ? 'active' : ''}">
+        			<a class="page-link" href="${pageContext.request.contextPath}/boardListSearch2?page=${i}&searchType=${newPagedto.searchType}&keyword=${newPagedto.keyword}"
+            		style="${newPagedto.page == i ? 'font-weight: bold;' : ''}">${i}</a>
+    			</li>
+				</c:forEach>
+
+				<!-- 다음 -->
+				<li class="page-item ${pagedto.next}" id="next" style="display: ${pagedto.next ? 'block' : 'none'};">
+				<a class="page-link" href="${pageContext.request.contextPath}/boardListSearch2?page=${pagedto.page + 1}&searchType=${pagedto.searchType}&keyword=${pagedto.keyword}"
+				aria-label="Next">다음</a></li>
+			</ul>
+		</div>
+
 
 		<!-- 검색 폼 -->
 		<div style="text-align: center;">
-			<form action="${pageContext.request.contextPath}/boardListSearch" method="get">
-				
+			<form action="${pageContext.request.contextPath}/boardListSearch2" method="get">
 				<!-- GET 방식으로 폼 전송 -->
 				<select name="searchType">
 					<option value="title">제목</option>
@@ -155,7 +155,6 @@
 				<button type="submit">검색</button>
 			</form>
 		</div>
-
 
 	</div>
     <%@ include file="./inc/footer.jsp" %>

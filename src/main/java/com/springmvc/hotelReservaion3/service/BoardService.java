@@ -41,5 +41,9 @@ public interface BoardService {
 	//게시판 전체 글 수
 	public int getCountBoard();
 
+	//게시판 검색 페이지
+	public List<BoardDTO> listPageSearch(PageDTO pagedto, String searchType, String keyword) throws Exception;
 	
+	//게시판 검색에 맞는 페이지수
+	public int getSearchCount(String searchType, String keyword) throws Exception;
 }

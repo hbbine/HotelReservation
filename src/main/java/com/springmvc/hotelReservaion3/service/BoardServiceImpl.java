@@ -15,6 +15,7 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardMapper mapper;
 
+
 	@Override
 	public void insertBoard(BoardDTO dto) throws Exception {
 		mapper.insertBoard(dto);
@@ -83,14 +84,25 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.getCountBoard();
 	}
 
-	
+	@Override
+	public List<BoardDTO> listPageSearch(PageDTO pagedto, String searchType, String keyword) throws Exception {
+
+		long totalCount = mapper.getCountBoard();
+		pagedto.setRow();
+		pagedto.setNum(totalCount);
+		
+		return mapper.listPageSearch(searchType, keyword, pagedto);
+	}
+
+	@Override
+	public int getSearchCount(String searchType, String keyword) throws Exception {
+		
+		return mapper.getSearchCount(searchType, keyword);
+	}
+
+
 
 	
 
-
-	
-	
-	
-	
 	
 }

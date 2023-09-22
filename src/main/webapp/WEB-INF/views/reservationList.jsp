@@ -6,7 +6,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <style>
-/* CSS 스타일을 적용할 표의 클래스를 지정합니다. */
+/* 컨테이너 스타일 */
+.container-custom {
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 5px;
+	margin-top: 20px;
+}
+
 .table-custom {
 	width: 100%;
 	font-size: 16px;
@@ -35,14 +42,10 @@
 		<img class="img-fluid"
 			src="${pageContext.request.contextPath}/resources/img/lobby3.jpg"
 			alt="" />
-		<div class="container py-5"></div>
 	</div>
 	<!-- Header End -->
 	
-	<div class="container">
-	<div style="display: flex; justify-content: center;">
-	<div>
-	<div class="reservationListform">
+	 <div class="container-custom">
 	<h2 class="block-title text-center">예약 상황</h2>
 	<table class="table table-bordered table-custom">
         <thead>
@@ -91,9 +94,6 @@
 </c:forEach>
         </tbody>
     </table>
-    </div>
-    </div>
-    </div>
     </div>
       
     <%@ include file="./inc/footer.jsp" %>

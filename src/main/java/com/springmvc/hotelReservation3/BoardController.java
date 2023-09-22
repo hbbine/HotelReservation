@@ -102,7 +102,7 @@ public class BoardController {
 	    boarddto.setM_id(m_id);
 		model.addAttribute("dto", boarddto);
 		
-		return "redirect:/boardListPage";	
+		return "redirect:/boardListSearch";	
 	}
 
 /* -------------------------목록----------------------------*/
@@ -111,7 +111,7 @@ public class BoardController {
 	public String boardList(Model model) {
 		List<BoardDTO> getallboardList = service.getAllBoardList();
 		model.addAttribute("boardList", getallboardList);
-		return "/boardList";
+		return "/boardListSearch";
 	}
 	
 /* -------------------------원글 보기----------------------------*/
@@ -194,7 +194,7 @@ public class BoardController {
 	    if (boarddto != null && boarddto.getM_id() != null && (boarddto.getM_id().equals(memberdto.getM_id()) || memberdto.getM_id().equals("admin"))) {
 	        service.deleteBoard(b_id); 
 	        System.out.println("글쓴이("+ boarddto.getM_id() + ")와 로그인id(" + memberdto.getM_id() + ")가 같아서 삭제완료");
-	        return "redirect:/boardList";    
+	        return "redirect:/boardListSearch";    
 	    } else {
 	    	 String alertScript = "alert('삭제 권한이 없습니다');";
 	         model.addAttribute("alertScript", alertScript);
@@ -209,6 +209,7 @@ public class BoardController {
 	@GetMapping(value = "/boardListPage")
 	public ModelAndView getBoard(PageDTO pagedto) throws Exception{
 		
+		System.out.println("boardListPage" +pagedto.getStartRow());
 		ModelAndView mv = new ModelAndView();
 		List<BoardDTO> list = service.getPageBoardList(pagedto);
 		
@@ -216,10 +217,69 @@ public class BoardController {
 		mv.addObject("pagedto", pagedto);
 		mv.setViewName("/boardListPage");
 		
-		return mv;
+		return mv;	
+	}
+	
+/* -------------------------게시판 검색 ----------------------------*/	
+	
+	//검색결과대로 나오긴 하나 페이지수가 전체페이지수임
+	@GetMapping(value="/boardListSearch")
+	public ModelAndView boardSearch(HttpSession session, PageDTO pagedto, 
+						@RequestParam(value = "searchType", defaultValue = "title") String searchType, 
+						@RequestParam(value = "keyword", defaultValue = "") String keyword) throws Exception{
 		
+		ModelAndView mv = new ModelAndView();
+		List<BoardDTO> list = service.listPageSearch(pagedto, searchType, keyword);
+		
+		
+		
+		// 검색 결과에 따라 새로운 PageDTO 생성
+	    PageDTO newPagedto = new PageDTO();
+	    newPagedto.setPage(pagedto.getPage()); // 현재 페이지 정보는 유지
+	    newPagedto.setSearchType(searchType);
+	    newPagedto.setKeyword(keyword);
+	    long totalCount = service.getSearchCount(searchType, keyword);
+	    newPagedto.setNum(totalCount);  // 검색 결과에 따라 전체 게시물 수 변경
+	    System.out.println(totalCount);
+	    
+	    //세션에 pagedto를 저장...근데 유지가 안되서 검색한게 일시적임
+        session.setAttribute("pagedto", pagedto);
+		
+		mv.addObject("list", list);
+		mv.addObject("pagedto", pagedto);
+		mv.setViewName("/boardListSearch");
+		
+		return mv;	
+
 	}
 
+	//검색결과대로 페이지 나오게 하는데 0페이지밖에 안뜸
+	@GetMapping(value="/boardListSearch2")
+	public ModelAndView boardSearch2(HttpSession session, PageDTO pagedto, 
+	                    @RequestParam(value = "searchType", defaultValue = "title") String searchType, 
+	                    @RequestParam(value = "keyword", defaultValue = "") String keyword) throws Exception{
+	    
+	    ModelAndView mv = new ModelAndView();
+	    List<BoardDTO> list = service.listPageSearch(pagedto, searchType, keyword);
+	    
+	    // 검색 결과에 따라 새로운 PageDTO 생성
+	    PageDTO newPagedto = new PageDTO();
+	    newPagedto.setPage(pagedto.getPage()); // 현재 페이지 정보는 유지
+	    newPagedto.setSearchType(searchType);
+	    newPagedto.setKeyword(keyword);
+	    long totalCount = service.getSearchCount(searchType, keyword);
+	    newPagedto.setNum(totalCount);  // 검색 결과에 따라 전체 게시물 수 변경
+	    System.out.println(totalCount);
+	    
+	    // 세션에 newPagedto를 저장하여 새로운 페이지 정보를 유지
+	    session.setAttribute("pagedto", newPagedto);
+	    
+	    mv.addObject("list", list);
+	    mv.addObject("pagedto", newPagedto); // 모델에 새로 생성한 newPagedto를 추가
+	    mv.setViewName("/boardListSearch2");
+	    
+	    return mv;    
+	}
 
 }
 

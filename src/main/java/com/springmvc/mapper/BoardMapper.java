@@ -12,6 +12,7 @@ import org.springframework.dao.DataAccessException;
 
 import com.springmvc.hotelReservation3.dto.BoardDTO;
 import com.springmvc.hotelReservation3.dto.PageDTO;
+import com.springmvc.hotelReservation3.dto.ReservationDTO;
 
 @Mapper
 public interface BoardMapper {
@@ -61,6 +62,31 @@ public interface BoardMapper {
 	@Select("SELECT COUNT(b_id) FROM board")
 	public int getCountBoard();
 
+	//게시판 검색
+	 @Select("SELECT b_id, m_id, b_title, b_date, b_viewcnt, is_admin FROM board " +
+	            "WHERE " +
+	            "CASE " +
+	            "   WHEN #{searchType} = 'title' THEN b_title LIKE CONCAT('%', #{keyword}, '%') " +
+	            "   WHEN #{searchType} = 'content' THEN b_content LIKE CONCAT('%', #{keyword}, '%') " +
+	            "   WHEN #{searchType} = 'writer' THEN m_id LIKE CONCAT('%', #{keyword}, '%') " +
+	            "   ELSE TRUE " +
+	            "END " +
+	            "ORDER BY is_admin DESC, b_date DESC " +
+	            "LIMIT #{pagedto.startRow}, #{pagedto.perPage}")
+	  public List<BoardDTO> listPageSearch( @Param("searchType") String searchType,
+			  								@Param("keyword") String keyword,
+			  								@Param("pagedto") PageDTO pagedto);
 	
+	
+	 //게시판 검색에 맞게 페이지수 가져오기
+	 @Select("SELECT COUNT(b_id) FROM board " +
+	            "WHERE " +
+	            "CASE " +
+	            "   WHEN #{searchType} = 'title' THEN b_title LIKE CONCAT('%', #{keyword}, '%') " +
+	            "   WHEN #{searchType} = 'content' THEN b_content LIKE CONCAT('%', #{keyword}, '%') " +
+	            "   WHEN #{searchType} = 'writer' THEN m_id LIKE CONCAT('%', #{keyword}, '%') " +
+	            "   ELSE TRUE " +
+	            "END ")
+	 public int getSearchCount(@Param("searchType") String searchType, @Param("keyword") String keyword);
 	
 }

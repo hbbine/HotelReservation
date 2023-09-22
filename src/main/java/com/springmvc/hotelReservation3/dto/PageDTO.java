@@ -13,6 +13,8 @@ public class PageDTO {
 	private long lastNum;
 	private boolean pre;
 	private boolean next;
+	private String searchType;
+	private String keyword;
 	
 	public PageDTO() {
 		this.page=1L;
@@ -129,6 +131,22 @@ public class PageDTO {
 	}
 	public void setNext(boolean next) {
 		this.next = next;
+	}
+
+	public String getSearchType() {
+		return searchType;
+	}
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 	
 	
