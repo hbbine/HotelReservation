@@ -123,8 +123,8 @@
 		<div>
 			<ul class="pagination">
 				<!-- 이전 -->
-				<li class="page-item ${pagedto.pre}" id="pre" style="display: ${pagedto.pre ? 'block' : 'none'};">
-				<a class="page-link" href="${pageContext.request.contextPath}/boardListSearch2?page=${pagedto.page - 1}&searchType=${pagedto.searchType}&keyword=${pagedto.keyword}"
+				<li class="page-item ${newPagedto.pre}" id="pre" style="display: ${newPagedto.pre ? 'block' : 'none'};">
+				<a class="page-link" href="${pageContext.request.contextPath}/boardListSearch2?page=${newPagedto.page - 1}&searchType=${newPagedto.searchType}&keyword=${newPagedto.keyword}"
 				aria-label="Previous">이전</a></li>
 
 				<!-- 현재 블록 -->
@@ -136,8 +136,8 @@
 				</c:forEach>
 
 				<!-- 다음 -->
-				<li class="page-item ${pagedto.next}" id="next" style="display: ${pagedto.next ? 'block' : 'none'};">
-				<a class="page-link" href="${pageContext.request.contextPath}/boardListSearch2?page=${pagedto.page + 1}&searchType=${pagedto.searchType}&keyword=${pagedto.keyword}"
+				<li class="page-item ${newPagedto.next}" id="next" style="display: ${newPagedto.next ? 'block' : 'none'};">
+				<a class="page-link" href="${pageContext.request.contextPath}/boardListSearch2?page=${newPagedto.page + 1}&searchType=${newPagedto.searchType}&keyword=${newPagedto.keyword}"
 				aria-label="Next">다음</a></li>
 			</ul>
 		</div>

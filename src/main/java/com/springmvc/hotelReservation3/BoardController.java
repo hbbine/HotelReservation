@@ -222,38 +222,38 @@ public class BoardController {
 	
 /* -------------------------게시판 검색 ----------------------------*/	
 	
-	//검색결과대로 나오긴 하나 페이지수가 전체페이지수임
-	@GetMapping(value="/boardListSearch")
-	public ModelAndView boardSearch(HttpSession session, PageDTO pagedto, 
-						@RequestParam(value = "searchType", defaultValue = "title") String searchType, 
-						@RequestParam(value = "keyword", defaultValue = "") String keyword) throws Exception{
-		
-		ModelAndView mv = new ModelAndView();
-		List<BoardDTO> list = service.listPageSearch(pagedto, searchType, keyword);
-		
-		
-		
-		// 검색 결과에 따라 새로운 PageDTO 생성
-	    PageDTO newPagedto = new PageDTO();
-	    newPagedto.setPage(pagedto.getPage()); // 현재 페이지 정보는 유지
-	    newPagedto.setSearchType(searchType);
-	    newPagedto.setKeyword(keyword);
-	    long totalCount = service.getSearchCount(searchType, keyword);
-	    newPagedto.setNum(totalCount);  // 검색 결과에 따라 전체 게시물 수 변경
-	    System.out.println(totalCount);
-	    
-	    //세션에 pagedto를 저장...근데 유지가 안되서 검색한게 일시적임
-        session.setAttribute("pagedto", pagedto);
-		
-		mv.addObject("list", list);
-		mv.addObject("pagedto", pagedto);
-		mv.setViewName("/boardListSearch");
-		
-		return mv;	
+	//게시판 아무검색없을때
+//	@GetMapping(value="/boardListSearch")
+//	public ModelAndView boardSearch(HttpSession session, PageDTO pagedto, 
+//						@RequestParam(value = "searchType", defaultValue = "title") String searchType, 
+//						@RequestParam(value = "keyword", defaultValue = "") String keyword) throws Exception{
+//		
+//		ModelAndView mv = new ModelAndView();
+//		List<BoardDTO> list = service.listPageSearch(pagedto, searchType, keyword);
+//		
+//		
+//		
+//		// 검색 결과에 따라 새로운 PageDTO 생성
+//	    PageDTO newPagedto = new PageDTO();
+//	    newPagedto.setPage(pagedto.getPage()); // 현재 페이지 정보는 유지
+//	    newPagedto.setSearchType(searchType);
+//	    newPagedto.setKeyword(keyword);
+//	    long totalCount = service.getSearchCount(searchType, keyword);
+//	    newPagedto.setNum(totalCount);  // 검색 결과에 따라 전체 게시물 수 변경
+//	    System.out.println(totalCount);
+//	    
+//	    //세션에 pagedto를 저장...근데 유지가 안되서 검색한게 일시적임
+//        session.setAttribute("pagedto", pagedto);
+//		
+//		mv.addObject("list", list);
+//		mv.addObject("pagedto", pagedto);
+//		mv.setViewName("/boardListSearch");
+//		
+//		return mv;	
+//
+//	}
 
-	}
-
-	//검색결과대로 페이지 나오게 하는데 0페이지밖에 안뜸
+	//게시판 검색결과대로 키워드랑 서치타입넣고 새롭게 newpageDto만들어서 페이지 나오게 함
 	@GetMapping(value="/boardListSearch2")
 	public ModelAndView boardSearch2(HttpSession session, PageDTO pagedto, 
 	                    @RequestParam(value = "searchType", defaultValue = "title") String searchType, 
@@ -261,21 +261,37 @@ public class BoardController {
 	    
 	    ModelAndView mv = new ModelAndView();
 	    List<BoardDTO> list = service.listPageSearch(pagedto, searchType, keyword);
+	    PageDTO newPagedto = new PageDTO();//검색결과 있을때 새롭게 pagedto 설정하려고 객체 선언
+	    long totalCount = service.getSearchCount(searchType, keyword); //검색결과에 따른 게시글 갯수 함수 실행
 	    
-	    // 검색 결과에 따라 새로운 PageDTO 생성
-	    PageDTO newPagedto = new PageDTO();
-	    newPagedto.setPage(pagedto.getPage()); // 현재 페이지 정보는 유지
-	    newPagedto.setSearchType(searchType);
-	    newPagedto.setKeyword(keyword);
-	    long totalCount = service.getSearchCount(searchType, keyword);
-	    newPagedto.setNum(totalCount);  // 검색 결과에 따라 전체 게시물 수 변경
+	    
+	    if(totalCount == 0) {
+	    	//검색결과 없을때 받아온 pagedto초기화
+	    	pagedto = new PageDTO();
+	    } else {
+	    	//검색결과 있을때 새롭게 페이지 설정
+	    	newPagedto.setPage(pagedto.getPage()); // 현재 페이지 정보는 유지
+		    newPagedto.setSearchType(searchType);
+		    newPagedto.setKeyword(keyword);
+		    newPagedto.setNum(totalCount);  // 검색 결과에 따라 전체 게시물 수 변경
+	    }
+
 	    System.out.println(totalCount);
+	    System.out.println("search2 : newpagedto startNum " + newPagedto.getStartNum());
+	    System.out.println("search2 : newpagedto lastNum " + newPagedto.getLastNum());
 	    
 	    // 세션에 newPagedto를 저장하여 새로운 페이지 정보를 유지
-	    session.setAttribute("pagedto", newPagedto);
+	    session.setAttribute("newPagedto", newPagedto);
 	    
+	    // 모델에 검색결과에 나온 게시글들과 새로 생성한 newPagedto를 추가
 	    mv.addObject("list", list);
-	    mv.addObject("pagedto", newPagedto); // 모델에 새로 생성한 newPagedto를 추가
+	    
+	    if(totalCount == 0) {
+	    	mv.addObject("newPagedto", pagedto); //검색결과 없을때 초기화한 pagedto보내줌
+	    }else {
+	    	mv.addObject("newPagedto", newPagedto); //검색결과 잇으면 새롭게 설정한 pagedto보내기
+	    }
+	     
 	    mv.setViewName("/boardListSearch2");
 	    
 	    return mv;    
