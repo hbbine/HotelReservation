@@ -40,18 +40,19 @@
 						<form:form modelAttribute="loginForm" method="post" class="reservations-box" >
 							<div class="col-12 ">
 								<div class="form-floating">
-								<label for="m_id">Id</label>
-									<form:input path="m_id" placeholder="memberId" style="width: 100%;"
+								<label for="m_id">ID</label>
+									<form:input path="m_id" placeholder="Id" style="width: 100%;"
 										required="true" data-error="ID is required." />
 								</div>
 							</div>
 							<div class="col-12 ">
 								<div class="form-floating">
 								<label for="m_password">Password</label>
-									<form:input path="m_password" type="pasword" placeholder="memberPassword" style="width: 100%;"
+									<form:input path="m_password" type="pasword" placeholder="Password" style="width: 100%;"
 										required="true" data-error="Password is required." />
 								</div>
 							</div>
+							<div  style="height:50px"></div>
 							<div class="col-12">
 								<button class="btn btn-primary w-100 py-3" type="submit" value="submit" id="submit">
 									Login Now</button>

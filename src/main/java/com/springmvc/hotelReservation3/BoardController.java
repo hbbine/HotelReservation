@@ -102,7 +102,7 @@ public class BoardController {
 	    boarddto.setM_id(m_id);
 		model.addAttribute("dto", boarddto);
 		
-		return "redirect:/boardListSearch";	
+		return "redirect:/boardListSearch2";	
 	}
 
 /* -------------------------목록----------------------------*/

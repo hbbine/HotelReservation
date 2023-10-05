@@ -17,16 +17,14 @@
 
 	<div class="about">
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="about_title"><h2>The REMERE / 10 years of excellence</h2></div>
-				</div>
-			</div>
-			<div class="row about_row">
+
 				
+
+			<div class="row about_row">
 				<!-- About Content -->
 				<div class="col-lg-6">
 					<div class="about_content">
+					<div class="about_title"><h2>The REMERE / 10 years of excellence</h2></div>
 						<div class="about_text">
 							<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit.
 							Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci ipsum, a bibendum lacus suscipit sit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse nec faucibus velit. Quisque eleifend orci.
@@ -39,7 +37,7 @@
 				<!-- About Images -->
 				<div class="col-lg-6">
 					<div class="about_images d-flex flex-row align-items-start justify-content-between flex-wrap">
-						<div id="map" style="width: 500px; height: 300px;"></div>
+						<div id="map" style="width: 650px; height: 300px;"></div>
 						<script type="text/javascript"
 							src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	7ed8d8be49cca6b786ccfaef22a8a687"></script>
 						<script>

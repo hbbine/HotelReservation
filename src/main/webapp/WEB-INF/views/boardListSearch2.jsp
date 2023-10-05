@@ -77,6 +77,38 @@
 	color: #06BBCC !important; /* 글자 색상 (파란색) */
 }
 
+/* 검색 폼 스타일 */
+.container-custom-search {
+    text-align: right;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    
+}
+
+.container-custom-search form {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    
+}
+
+.container-custom-search select,
+.container-custom-search input[type="text"],
+.container-custom-search button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.container-custom-search button {
+    background-color: white;
+    border-color: #06BBCC !important;
+    color: #06BBCC !important;
+    cursor: pointer;
+}
+
 
 
 </style>
@@ -91,6 +123,30 @@
 
     <div class="container-custom">
         <div class="block-title">Q & A</div>
+        
+        <div class="row my-3 align-items-center">
+        	<div class="col-6">
+             <a href="${pageContext.request.contextPath}/writeBoard" class="btn btn-primary btn-block">글쓰기</a>
+         	</div>
+        
+        <!-- 검색 폼 -->
+        <div class="col-6">
+		<div class="container-custom-search">
+			<form action="${pageContext.request.contextPath}/boardListSearch2" method="get">
+				<!-- GET 방식으로 폼 전송 -->
+				<select name="searchType">
+					<option value="title">제목</option>
+					<option value="content">내용</option>
+					<option value="writer">작성자</option>
+				</select> 
+				<input type="text" name="keyword" />
+				<button type="submit">검색</button>
+			</form>
+		</div>
+		</div>
+		</div>
+		<br style="margin-bottom: 20px;">
+		
         <table class="table-custom">
             <thead>
                 <tr>
@@ -115,9 +171,7 @@
             </tbody>
         </table>
         <br>
-         <div style="display: flex; justify-content: flex-end;">
-             <a href="${pageContext.request.contextPath}/writeBoard" class="btn btn-primary">Write</a>
-         </div>
+    
 
 		<!-- 페이징 -->
 		<div>
@@ -141,21 +195,6 @@
 				aria-label="Next">다음</a></li>
 			</ul>
 		</div>
-
-
-		<!-- 검색 폼 -->
-		<div style="text-align: center;">
-			<form action="${pageContext.request.contextPath}/boardListSearch2" method="get">
-				<!-- GET 방식으로 폼 전송 -->
-				<select name="searchType">
-					<option value="title">제목</option>
-					<option value="content">내용</option>
-					<option value="writer">작성자</option>
-				</select> <input type="text" name="keyword" />
-				<button type="submit">검색</button>
-			</form>
-		</div>
-
 	</div>
     <%@ include file="./inc/footer.jsp" %>
 </body>
