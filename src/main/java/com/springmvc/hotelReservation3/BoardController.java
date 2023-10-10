@@ -80,7 +80,7 @@ public class BoardController {
 		if(file != null) {
 			 fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
 			} else {
-			 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+			 fileName = uploadPath + File.separator + "images" + File.separator + "none.png"; //아무 이미지도 올리지 않을때 처
 			}
 		
 		boarddto.setB_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
@@ -221,37 +221,6 @@ public class BoardController {
 	}
 	
 /* -------------------------게시판 검색 ----------------------------*/	
-	
-	//게시판 아무검색없을때
-//	@GetMapping(value="/boardListSearch")
-//	public ModelAndView boardSearch(HttpSession session, PageDTO pagedto, 
-//						@RequestParam(value = "searchType", defaultValue = "title") String searchType, 
-//						@RequestParam(value = "keyword", defaultValue = "") String keyword) throws Exception{
-//		
-//		ModelAndView mv = new ModelAndView();
-//		List<BoardDTO> list = service.listPageSearch(pagedto, searchType, keyword);
-//		
-//		
-//		
-//		// 검색 결과에 따라 새로운 PageDTO 생성
-//	    PageDTO newPagedto = new PageDTO();
-//	    newPagedto.setPage(pagedto.getPage()); // 현재 페이지 정보는 유지
-//	    newPagedto.setSearchType(searchType);
-//	    newPagedto.setKeyword(keyword);
-//	    long totalCount = service.getSearchCount(searchType, keyword);
-//	    newPagedto.setNum(totalCount);  // 검색 결과에 따라 전체 게시물 수 변경
-//	    System.out.println(totalCount);
-//	    
-//	    //세션에 pagedto를 저장...근데 유지가 안되서 검색한게 일시적임
-//        session.setAttribute("pagedto", pagedto);
-//		
-//		mv.addObject("list", list);
-//		mv.addObject("pagedto", pagedto);
-//		mv.setViewName("/boardListSearch");
-//		
-//		return mv;	
-//
-//	}
 
 	//게시판 검색결과대로 키워드랑 서치타입넣고 새롭게 newpageDto만들어서 페이지 나오게 함
 	@GetMapping(value="/boardListSearch2")
