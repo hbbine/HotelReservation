@@ -6,6 +6,7 @@ import com.springmvc.hotelReservation3.dto.BoardDTO;
 import com.springmvc.hotelReservation3.dto.PageDTO;
 
 
+
 public interface BoardService {
 
 	//게시판 글쓰기
